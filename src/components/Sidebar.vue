@@ -5,18 +5,41 @@
             <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
         </form>
         <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Cras justo odio
+            <li  
+            v-for="(person,index) in people" 
+            :key="index" 
+            class="list-group-item d-flex justify-content-between align-items-center"
+            :class="{'bg-light': index % 2 === 0 }"
+            >
+                <h4>{{ person.name }}</h4>
                 <span class="badge badge-primary badge-pill">14</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Dapibus ac facilisis in
-                <span class="badge badge-primary badge-pill">2</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Morbi leo risus
-                <span class="badge badge-primary badge-pill">1</span>
             </li>
         </ul>
     </div>
 </template>
+
+
+
+<script>
+
+import { mapGetters } from 'vuex';
+
+export default {
+  name: 'Sidebar',
+  data () {
+    return {
+    }
+  },
+  methods:{
+      
+  },
+  computed:{
+    ...mapGetters({
+            people: 'getPeople'
+        })
+  },
+  created(){
+    //  this.$store.dispatch('getPeople');
+  }
+}
+</script>
