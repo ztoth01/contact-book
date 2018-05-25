@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
 
     state: {
-        people: [{
+        contacts: [{
                 "id": 1,
                 "name": "Peter Kiss",
                 "phone": "023567982",
@@ -148,8 +148,8 @@ export const store = new Vuex.Store({
     },
 
     getters: {
-        getPeople: state => {
-            return state.people;
+        getContact: state => {
+            return state.contacts;
         }
     }
 
