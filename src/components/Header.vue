@@ -21,7 +21,25 @@
                     <a class="nav-link" href="#">About</a>
                 </li>
                 </ul>
+                <a @click.prevent="saveAll" href="#" class="clear-btn btn blue lighten-3">Save</a>
             </div>
         </nav>
     </div>
 </template>
+
+
+<script>
+export default {
+  name: 'Header',
+  data () {
+    return {
+     
+    }
+  },
+  methods:{
+      saveAll(){
+          this.$store.dispatch('saveData');
+      }
+  }
+}
+</script>
