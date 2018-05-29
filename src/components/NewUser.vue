@@ -68,7 +68,9 @@
           </div>
         </div>
         <div class="input">
-          <input @change="onFileSelected" type="file">
+          <img v-if="imageUrl !== ''" :src="imageUrl" title="profile image"/>
+          <button @click.prevent="uploadImage" class="btn btn-info">Upload Profile Image</button>
+          <input @change="onFileSelected" style="display: none;" type="file" ref="fileInput" accept="image/*">
         </div>
         <div class="submit">
           <button type="submit">Submit</button>
@@ -88,7 +90,8 @@
         password: '',
         confirmPassword: '',
         hobbyInputs: [],
-        profilePicture: null
+        profilePicture: null,
+        imageUrl:''
       }
     },
     validations: {
@@ -119,10 +122,24 @@
         this.hobbyInputs.push(newHobby)
       },
       onFileSelected(event){
-        this.profilePicture = event.target.files[0]
+        const files = event.target.files
+        const fileName = files[0].name
+        if(fileName.lastIndexOf('.') <= 0){
+          return alert('Please make sure you use a valid file type')
+        }
+        const fileReader = new FileReader();
+        fileReader.addEventListener('load',()=>{
+          this.imageUrl = fileReader.result
+        })
+        fileReader.readAsDataURL(files[0])
+        this.profilePicture = files[0]
+        //this.profilePicture = event.target.files[0]
       },
       onDeleteHobby (id) {
         this.hobbyInputs = this.hobbyInputs.filter(hobby => hobby.id !== id)
+      },
+      uploadImage(){
+        this.$refs.fileInput .click()
       },
       onSubmit () {
         const formData = {

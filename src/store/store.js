@@ -1,6 +1,7 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import axios from 'axios'
+import * as firebase from 'firebase'
 
 Vue.use(Vuex);
 
@@ -45,10 +46,27 @@ export const store = new Vuex.Store({
                 //.catch(err => console.log(err))
         },
         'SINGUP': (state, payload) => {
-
+            let imageUrl;
+            let key;
             axios.post('https://contact-book-7d273.firebaseio.com/contacts.json', payload)
-                .then(res => console.log(res))
+                .then(res => {
+                    //https//
+                    key = res.data.name
+                    return key
+                })
+                .then( key => {
+                    const filenName = payload.profilePicture.name
+                    const ext = filenName.slice(filenName.lastIndexOf('.'));
+                    console.log(payload.profilePicture);
+                    return firebase.storage().ref("contacts/" + key + '.' + ext).put(payload.profilePicture);
+                })
+                .then(fileData=>{
+                    imageUrl = fileData.metadata.downloadURLs[0]
+                    console.log(imageUrl);
+                    
+                })
                 .catch(err => console.log(err))
+
         }
     },
 
