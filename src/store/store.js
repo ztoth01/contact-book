@@ -1,8 +1,8 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import axios from 'axios'
-Vue.use(Vuex);
 
+Vue.use(Vuex);
 
 export const store = new Vuex.Store({
 
@@ -27,8 +27,8 @@ export const store = new Vuex.Store({
         },
         'SAVE_NEW_CONTACT': (state) => {
             axios.post('https://contact-book-7d273.firebaseio.com/contacts.json', state.contacts)
-                //.then(res => console.log(res))
-                //.catch(err => console.log(err))
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
         },
         'GET_DB_DATA': (state) => {
             axios.get('https://contact-book-7d273.firebaseio.com/contacts.json')
@@ -43,6 +43,12 @@ export const store = new Vuex.Store({
                     }
                 })
                 //.catch(err => console.log(err))
+        },
+        'SINGUP': (state, payload) => {
+
+            axios.post('https://contact-book-7d273.firebaseio.com/contacts.json', payload)
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
         }
     },
 
@@ -54,11 +60,11 @@ export const store = new Vuex.Store({
         setSingleContact({commit}){
             commit('SET_SINGLE_CONTACT');
         },
-        // saveData({commit}) {
-        //     commit('SAVE_DATA');
-        // },
         getDbData({commit}) {
             commit('GET_DB_DATA');
+        },
+        singUp({commit}, payload) {
+            commit('SINGUP', payload);
         }
     },
 

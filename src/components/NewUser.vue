@@ -2,55 +2,53 @@
   <div id="signup ">
     <div class="signup-form mx-auto col-md-8">
       <form @submit.prevent="onSubmit">
-        <div class="input" :class="{invalid: $v.email.$error}">
+        <!-- <span>{{ $v }}</span> -->
+        <div class="input" :class="{invalid: $v.name.$error}">
           <label for="email">Name</label>
           <input
                   type="text"
                   id="name"
-                  @input="$v.name.$touch()"
+                  @blur="$v.name.$touch()"
                   v-model="name">
-          <p v-if="!$v.email.email">Please provide a valid email address.</p>
-          <p v-if="!$v.email.required">This field must not be empty.</p>
+          <p v-if="!$v.name.name">Please enter your name.</p>
+          <p v-if="!$v.name.required">Required.</p>
         </div>
         <div class="input" :class="{invalid: $v.email.$error}">
           <label for="email">Mail</label>
           <input
                   type="email"
                   id="email"
-                  @input="$v.email.$touch()"
+                  @blur="$v.email.$touch()"
                   v-model="email">
           <p v-if="!$v.email.email">Please provide a valid email address.</p>
-          <p v-if="!$v.email.required">This field must not be empty.</p>
+          <p v-if="!$v.email.required">Required.</p>
         </div>
-        <div class="input">
+        <!-- <div class="input">
           <label for="age">Your Age</label>
           <input
                   type="number"
                   id="age"
                   v-model.number="age">
-        </div>
-        <div class="input">
+        </div> -->
+        <div class="input" :class="{invalid: $v.password.$error}">
           <label for="password">Password</label>
           <input
                   type="password"
                   id="password"
+                  @blur="$v.password.$touch()"
                   v-model="password">
+          <p v-if="!$v.password.minLen">Please use a password at least 6 characters long</p>
+          <p v-if="!$v.password.required">Required.</p>
         </div>
-        <div class="input">
+        <div class="input" :class="{invalid: $v.confirmPassword.$error}">
           <label for="confirm-password">Confirm Password</label>  
           <input
                   type="password"
                   id="confirm-password"
+                  @blur="$v.confirmPassword .$touch()"
                   v-model="confirmPassword">
-        </div>
-        <div class="input">
-          <label for="country">Country</label>
-          <select id="country" v-model="country">
-            <option value="usa">USA</option>
-            <option value="india">India</option>
-            <option value="uk">UK</option>
-            <option value="germany">Germany</option>
-          </select>
+          <p v-if="!$v.confirmPassword.sameAs">Please doesn't match</p>
+          <p v-if="!$v.confirmPassword.required">Required.</p>
         </div>
         <div class="hobbies">
           <h3>Add some Hobbies</h3>
@@ -69,9 +67,8 @@
             </div>
           </div>
         </div>
-        <div class="input inline">
-          <input type="checkbox" id="terms" v-model="terms">
-          <label for="terms">Accept Terms of Use</label>
+        <div class="input">
+          <input @change="onFileSelected" type="file">
         </div>
         <div class="submit">
           <button type="submit">Submit</button>
@@ -82,24 +79,35 @@
 </template>
 
 <script>
-  import { required, email } from 'vuelidate/lib/validators'
+  import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
   export default {
     data () {
       return {
         name:'',
         email: '',
-        age: null,
         password: '',
         confirmPassword: '',
-        country: 'usa',
         hobbyInputs: [],
-        terms: false
+        profilePicture: null
       }
     },
     validations: {
       email: {
         required,
         email
+      },
+      name: {
+        required,
+        name
+      },
+      password:{
+          required,
+          minLen: minLength(6)
+      },
+      confirmPassword:{
+         sameAs: sameAs(vm =>{
+           return vm.password
+         })
       }
     },
     methods: {
@@ -110,21 +118,23 @@
         }
         this.hobbyInputs.push(newHobby)
       },
+      onFileSelected(event){
+        this.profilePicture = event.target.files[0]
+      },
       onDeleteHobby (id) {
         this.hobbyInputs = this.hobbyInputs.filter(hobby => hobby.id !== id)
       },
       onSubmit () {
         const formData = {
+          name: this.name,
           email: this.email,
-          age: this.age,
           password: this.password,
           confirmPassword: this.confirmPassword,
-          country: this.country,
           hobbies: this.hobbyInputs.map(hobby => hobby.value),
-          terms: this.terms
+          profilePicture: this.profilePicture
         }
-        console.log(formData)
-        this.$store.dispatch('signup', formData)
+        //console.log(formData)
+        this.$store.dispatch('singUp', formData)
       }
     }
   }
@@ -136,6 +146,7 @@
     border: 1px solid #eee;
     padding: 20px;
     box-shadow: 0 2px 3px #ccc;
+    color: red !important;
   }
   .signup-form label{
       color: white;
