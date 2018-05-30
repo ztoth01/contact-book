@@ -50,7 +50,6 @@ export const store = new Vuex.Store({
             let key;
             axios.post('https://contact-book-7d273.firebaseio.com/contacts.json', payload)
                 .then(res => {
-                    //https//
                     key = res.data.name
                     return key
                 })
@@ -58,15 +57,14 @@ export const store = new Vuex.Store({
                     const filenName = payload.profilePicture.name
                     const ext = filenName.slice(filenName.lastIndexOf('.'));
                     console.log(payload.profilePicture);
-                    return firebase.storage().ref("contacts/" + key + '.' + ext).put(payload.profilePicture);
+                    return firebase.storage().ref("contacts/" + key + ext).put(payload.profilePicture);
                 })
-                .then(fileData=>{
-                    imageUrl = fileData.metadata.downloadURLs[0]
-                    console.log(imageUrl);
-                    
+                .then(fileData =>{
+                    fileData.ref.getDownloadURL().then((filePath) => {
+                        return firebase.database().ref('/contacts').child(key).update({profileImage: filePath})
+                    });
                 })
-                .catch(err => console.log(err))
-
+                .catch(err => console.log(err))  
         }
     },
 
