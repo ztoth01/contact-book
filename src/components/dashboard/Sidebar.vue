@@ -14,7 +14,12 @@
             :class="{'bg-light': index % 2 === 0 }"
             >
                 <span class="avatar">
-                    <img :src="contact.profileImage" :alt="contact.name">
+                    <transition>
+                        <img v-show="isLoad" :src="contact.profileImage" :alt="contact.name" @load="loaded">
+                    </transition>
+                    <Spinner v-show="!isLoad" name="cube-grid" color="#d14f65"/>
+                    <!-- http://vue-spinkit.surge.sh/ -->
+                    <!-- <div v-show="!isLoad" class="loading">Loading...</div> -->
                     <!-- <img :src="require(`../../assets/${contact.img}`)" :alt="contact.name"> -->
                 </span>
                 <h4>{{ contact.name }}</h4>
@@ -33,16 +38,22 @@ export default {
   data () {
     return {
         searchContact:'',
-        contactList: []
+        contactList: [],
+        isLoad: false
     }
   },
   methods:{
-      clearSearch(){
-          this.searchContact = ''
-      },
-      selectContact(index){
-          this.$store.dispatch('selectContact', index);
-      }
+        clearSearch(){
+            this.searchContact = ''
+        },
+        selectContact(index){
+            this.$store.dispatch('selectContact', index);
+        },
+        loaded(){
+            setTimeout(() => {
+                this.isLoad = true
+            }, 1000);
+        }
   },
   computed:{
     ...mapGetters({
@@ -62,6 +73,7 @@ export default {
     .avatar{
         height: 60px;
         width: 60px;
+        background: url()
     }
     .avatar img{
         width: 100%;

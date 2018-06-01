@@ -12,8 +12,10 @@
 
     <div class="card border-success mt-5">
         <div class="card-header d-flex">
-            <span><img :src="contact.profileImage" :alt="contact.name"></span>
+            <span v-show="isLoad"><img @load="loaded" :src="contact.profileImage" :alt="contact.name"></span>
+            <Spinner v-show="!isLoad" name="cube-grid" color="#d14f65"/>
             <h1 class="display-3">{{ contact.name }}</h1>
+            
         </div>
         <div class="card-body">
             <!-- <h4 class="card-title display-3">{{ contact.name }}</h4> -->
@@ -31,10 +33,15 @@ export default {
   name: 'Main',
   data () {
     return {
-        
+        isLoad: false
     }
   },
   methods:{
+      loaded(){
+            setTimeout(() => {
+                this.isLoad = true
+            }, 1000);
+        }
     
   },
   computed:{
