@@ -10,7 +10,7 @@ export const store = new Vuex.Store({
     //state
     state: {
         contacts: [],
-        selectedContact: {}
+        selectedContact: null
     },
 
     //muttations
@@ -35,15 +35,18 @@ export const store = new Vuex.Store({
             axios.get('https://contact-book-7d273.firebaseio.com/contacts.json')
                 .then(res => {
                     for (var key in res.data) {
+                        let singleContact = {}
                         if (res.data.hasOwnProperty(key)) {
-                            if (res.data[key].length > 0) {
-                                state.selectedContact = res.data[key][0]
-                            }
-                            state.contacts = res.data[key];
+                            singleContact = res.data[key]
+                            singleContact.id = key
+                            state.contacts.push(singleContact);
                         }
                     }
+                    if (state.contacts.length > 0 ) {
+                        state.selectedContact = state.contacts[0]
+                    }
                 })
-                //.catch(err => console.log(err))
+                .catch(err => console.log(err))
         },
         'SINGUP': (state, payload) => {
             let imageUrl;
@@ -86,7 +89,7 @@ export const store = new Vuex.Store({
 
     //getters
     getters: {
-        getContact: state => {
+        getContacts: state => {
             return state.contacts;
         },
         getSelectedContact: state => {

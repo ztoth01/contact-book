@@ -1,6 +1,7 @@
 <template>
   <div class="container d-flex flex-wrap">
       <Sidebar/>
+      <Main/>
     </div>
 </template>
 

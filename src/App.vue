@@ -25,6 +25,9 @@ export default {
     Home,
     Dashboard,
     NewUser
+  },
+  created() {
+    this.$store.dispatch('getDbData');
   }
 }
 </script>

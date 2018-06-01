@@ -8,13 +8,14 @@
         <ul class="list-group">
             <li  
             v-for="(contact,index) in filterContact" 
-            :key="index" 
+            :key="contact.id" 
             @click="selectContact(index)"
             class="list-group-item d-flex justify-content-start align-items-center"
             :class="{'bg-light': index % 2 === 0 }"
             >
                 <span class="avatar">
-                    <img :src="require(`../../assets/${contact.img}`)" :alt="contact.name">
+                    <img :src="contact.profileImage" :alt="contact.name">
+                    <!-- <img :src="require(`../../assets/${contact.img}`)" :alt="contact.name"> -->
                 </span>
                 <h4>{{ contact.name }}</h4>
             </li>
@@ -22,7 +23,6 @@
         </div>
     </div>
 </template>
-
 
 <script>
 
@@ -46,23 +46,16 @@ export default {
   },
   computed:{
     ...mapGetters({
-            contacts: 'getContact'
+            contacts: 'getContacts'
         }),
         filterContact(){
             return this.contacts.filter((elem)=>{
-                return elem.name.toLowerCase().match(this.searchContact)
+                return elem.name.toLowerCase().match(this.searchContact.toLowerCase())
             });
         }
-        // upperCaseFirstLetter(name){
-        //     return name.charAt(0).toUpperCase() + string.slice(1);
-        // }
-  },
-   created() {
-    this.$store.dispatch('getDbData');
   }
 }
 </script>
-
 
 <style scoped>
 
