@@ -17,7 +17,8 @@
                     <transition>
                         <img v-show="isLoad" :src="contact.profileImage" :alt="contact.name" @load="loaded">
                     </transition>
-                    <Spinner v-show="!isLoad" name="cube-grid" color="#d14f65"/>
+                    <span v-show="!isLoad" ><img src="@/assets/loading.gif" alt=""></span>
+                    <!-- <Spinner v-show="!isLoad" name="cube-grid" color="#d14f65"/> -->
                     <!-- http://vue-spinkit.surge.sh/ -->
                     <!-- <div v-show="!isLoad" class="loading">Loading...</div> -->
                     <!-- <img :src="require(`../../assets/${contact.img}`)" :alt="contact.name"> -->

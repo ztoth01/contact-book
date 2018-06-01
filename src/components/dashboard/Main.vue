@@ -13,7 +13,8 @@
     <div class="card border-success mt-5">
         <div class="card-header d-flex">
             <span v-show="isLoad"><img @load="loaded" :src="contact.profileImage" :alt="contact.name"></span>
-            <Spinner v-show="!isLoad" name="cube-grid" color="#d14f65"/>
+            <span v-show="!isLoad"><img src="@/assets/loading.gif" alt=""></span>
+            <!-- <Spinner v-show="!isLoad" name="cube-grid" color="#d14f65"/> -->
             <h1 class="display-3">{{ contact.name }}</h1>
             
         </div>
