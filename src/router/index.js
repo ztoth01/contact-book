@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import NewUser from '@/components/NewUser.vue'
+import Singup from '@/components/Singup.vue'
 import Dashboard from '@/components/dashboard/Dashboard.vue' 
 import Home from '@/components/Home.vue'
 
@@ -18,8 +18,8 @@ export default new Router({
             component: Dashboard
         },
         {
-            path: '/new-user',
-            component: NewUser
+            path: '/singup',
+            component: Singup
         }
     ]
 })

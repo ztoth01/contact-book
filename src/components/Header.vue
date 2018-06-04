@@ -10,7 +10,7 @@
                 <ul class="navbar-nav mr-auto">
                     <router-link to="/" class="nav-link" activeClass="active" tag="li"><a>Home</a></router-link>
                     <router-link to="/dashboard" class="nav-link" activeClass="active" tag="li"><a>Dashboard</a></router-link>
-                    <router-link to="/new-user" class="nav-link" activeClass="active" tag="li"><a>New User</a></router-link>
+                    <router-link to="/singup" class="nav-link" activeClass="active" tag="li"><a>Sing Up</a></router-link>
                 </ul>
                 <a @click.prevent="saveAll" href="#" class="clear-btn btn blue lighten-3">Save</a>
             </div>

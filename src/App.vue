@@ -15,7 +15,7 @@ import Dashboard from '@/components/dashboard/Dashboard.vue'
 import Footer from '@/components/Footer.vue'
 import Header from '@/components/Header.vue'
 import Home from '@/components/Home.vue'
-import NewUser from '@/components/NewUser.vue'
+import Singup from '@/components/Singup.vue'
 
 export default {
   name: 'app',
@@ -24,7 +24,7 @@ export default {
     Footer,
     Home,
     Dashboard,
-    NewUser
+    Singup
   },
   created() {
     this.$store.dispatch('getDbData');
