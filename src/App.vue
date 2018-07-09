@@ -13,9 +13,10 @@
 
 import Dashboard from '@/components/dashboard/Dashboard.vue'
 import Footer from '@/components/Footer.vue'
-import Header from '@/components/Header.vue'
+import Header from '@/components/header/Header.vue'
 import Home from '@/components/Home.vue'
-import Singup from '@/components/Singup.vue'
+import Signup from '@/components/auth/Signup.vue'
+import Signin from '@/components/auth/Signin.vue'
 
 export default {
   name: 'app',
@@ -24,7 +25,8 @@ export default {
     Footer,
     Home,
     Dashboard,
-    Singup
+    Signup,
+    Signin
   },
   created() {
     this.$store.dispatch('getDbData');

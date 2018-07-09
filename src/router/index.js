@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Singup from '@/components/Singup.vue'
+import Signup from '@/components/auth/Signup.vue'
+import Signin from '@/components/auth/Signin.vue'
 import Dashboard from '@/components/dashboard/Dashboard.vue' 
 import Home from '@/components/Home.vue'
 
@@ -18,8 +19,13 @@ export default new Router({
             component: Dashboard
         },
         {
-            path: '/singup',
-            component: Singup
-        }
+            path: '/signup',
+            component: Signup
+        },
+        {
+            path: '/signin',
+            component: Signin
+        },
+        
     ]
 })

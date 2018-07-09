@@ -11,7 +11,7 @@
     </div> -->
 
     <div class="card border-success mt-5">
-        <div class="card-header d-flex">
+        <div class="card-header d-flex" v-if="contact !== null">
             <span v-show="isLoad"><img @load="loaded" :src="contact.profileImage" :alt="contact.name"></span>
             <span v-show="!isLoad"><img src="@/assets/loading.gif" alt=""></span>
             <!-- <Spinner v-show="!isLoad" name="cube-grid" color="#d14f65"/> -->
@@ -49,7 +49,7 @@ export default {
     ...mapGetters({
             contact: 'getSelectedContact'
         })
-  }
+  },
 }
 </script>
 

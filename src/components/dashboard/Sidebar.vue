@@ -1,7 +1,7 @@
 <template>
     <div class="col-md-4 pl-0 mt-4 main--sidebar">
         <form class="form-inline my-2 justify-content-between search--bar">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" v-model="searchContact">
+            <input class="form-control mr-sm-2" type="text" @focus="inputClear" @blur="inputBlur" :placeholder="inputPlaceHolder" v-model="searchContact">
             <button class="btn btn-primary my-2 my-sm-0" @click.prevent="clearSearch" type="submit">Clear</button>
         </form>
        <div class="search--bar-wrapper">
@@ -40,7 +40,8 @@ export default {
     return {
         searchContact:'',
         contactList: [],
-        isLoad: false
+        isLoad: false,
+        inputPlaceHolder: 'Search'
     }
   },
   methods:{
@@ -54,6 +55,12 @@ export default {
             setTimeout(() => {
                 this.isLoad = true
             }, 1000);
+        },
+        inputClear(){
+            this.inputPlaceHolder = ''
+        },
+        inputBlur(){
+            this.inputPlaceHolder = 'Search'
         }
   },
   computed:{
