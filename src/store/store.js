@@ -16,7 +16,7 @@ export const store = new Vuex.Store({
     //muttations
     mutations: {
         'SELECT_CONTACT': (state, payload) => {
-            state.selectedContact = state.contacts[payload]
+            state.selectedContact = state.contacts.find(elem => elem.id === payload);
         },
         'SET_SINGLE_CONTACT': (state) => {
             state.selectedContact = state.contacts[0];

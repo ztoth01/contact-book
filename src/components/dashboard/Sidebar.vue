@@ -9,7 +9,7 @@
             <li  
             v-for="(contact,index) in filterContact" 
             :key="contact.id" 
-            @click="selectContact(index)"
+            @click="selectContact(contact.id)"
             class="list-group-item d-flex justify-content-start align-items-center"
             :class="{'bg-light': index % 2 === 0 }"
             >
@@ -48,13 +48,13 @@ export default {
         clearSearch(){
             this.searchContact = ''
         },
-        selectContact(index){
-            this.$store.dispatch('selectContact', index);
+        selectContact(id){
+            this.$store.dispatch('selectContact', id);
         },
         loaded(){
             setTimeout(() => {
                 this.isLoad = true
-            }, 1000);
+            }, 100);
         },
         inputClear(){
             this.inputPlaceHolder = ''
