@@ -27,10 +27,8 @@ export default {
     Dashboard,
     Signup,
     Signin
-  },
-  created() {
-    this.$store.dispatch('getDbData');
   }
+  
 }
 </script>
 

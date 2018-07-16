@@ -15,6 +15,9 @@ export default {
   components: {
     Sidebar,
     Main
+  },
+  created() {
+    this.$store.dispatch('getDbData');
   }
 }
 </script>

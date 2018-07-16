@@ -5,16 +5,16 @@
             <router-link to="/">Contact Book</router-link>
         </div>
         <ul>
-            <li>
+            <li v-if="auth">
                 <router-link to="/dashboard" class="nav-link" activeClass="active">Dashboard</router-link>
             </li>
-            <li>
+            <li v-if="!auth">
                 <router-link to="/signup" class="nav-link" activeClass="active">Sign Up</router-link>
             </li>
-            <li >
+            <li v-if="!auth">
                 <router-link to="/signin" class="nav-link" activeClass="active">Sign In</router-link>
             </li>
-            <li>
+            <li v-if="auth">
                 <button @click="logout" class="logout nav-link">Logout</button>  
             </li>  
         </ul>
@@ -38,6 +38,11 @@ export default {
         logout(){
             this.$store.dispatch('logOut')
         }
+    },
+    computed:{
+      auth(){
+        return this.$store.getters.isAuthenticated
+      }
     }
 }
 </script>
