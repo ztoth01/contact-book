@@ -28,6 +28,15 @@ axios.defaults.headers.get['Accepts'] = 'application/json'
 // axios.interceptors.request.eject(reqInterceptor)
 // axios.interceptors.response.eject(resInterceptor)
 
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  if(requiresAuth) {
+     next('/sign-in');
+  } else {
+    next();
+  }
+  });
+
 new Vue({
   store,
   router,
@@ -42,3 +51,5 @@ new Vue({
     })
   }
 }).$mount('#app')
+
+

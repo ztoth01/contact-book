@@ -95,9 +95,16 @@ export default {
         margin-left: 20px;
     }
     .main--sidebar{
-        height: 80vh;
+        height: 30vh;
         overflow: hidden;
       
+    }
+
+    @media only screen and (min-width: 600px) {
+        .main--sidebar{
+            height: 80vh;
+            overflow: hidden;
+        }
     }
     .list-group{
     

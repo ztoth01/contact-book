@@ -16,7 +16,10 @@ export default new Router({
         },
         {
             path: '/dashboard',
-            component: Dashboard
+            component: Dashboard,
+            meta: {
+                requiresAuth: false
+            }
         },
         {
             path: '/signup',

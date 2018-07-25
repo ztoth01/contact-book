@@ -10,7 +10,7 @@
         <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
     </div> -->
 
-    <div class="card border-success mt-5">
+    <div class="card mt-5 col-sm-8">
         <div class="card-header d-flex" v-if="contact !== null">
             <span v-show="isLoad"><img @load="loaded" :src="contact.profileImage" :alt="contact.name"></span>
             <span v-show="!isLoad"><img src="@/assets/loading.gif" alt=""></span>
@@ -57,6 +57,7 @@ export default {
 
     .main-content{
         min-height: 80vh;
+        overflow: hidden;
     }
 
 </style>
