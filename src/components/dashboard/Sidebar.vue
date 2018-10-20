@@ -6,13 +6,12 @@
         </form>
        <div class="search--bar-wrapper">
         <ul class="list-group">
-            <li  
-            v-for="(contact,index) in filterContact" 
-            :key="contact.id" 
-            @click="selectContact(contact.id)"
-            class="list-group-item d-flex justify-content-start align-items-center"
-            :class="{'bg-light': index % 2 === 0 }"
-            >
+            <li
+                v-for="(contact,index) in filterContact"
+                :key="contact.id"
+                @click="selectContact(contact.id)"
+                class="list-group-item d-flex justify-content-start align-items-center"
+                :class="{'bg-light': index % 2 === 0 }">
                 <span class="avatar">
                     <transition>
                         <img v-show="isLoad" :src="contact.profileImage" :alt="contact.name" @load="loaded">
@@ -52,9 +51,7 @@ export default {
             this.$store.dispatch('selectContact', id);
         },
         loaded(){
-            setTimeout(() => {
-                this.isLoad = true
-            }, 100);
+            this.isLoad = true
         },
         inputClear(){
             this.inputPlaceHolder = ''
@@ -89,7 +86,7 @@ export default {
         display: block;
     }
     .list-group-item{
-        
+
     }
     .list-group-item h4{
         margin-left: 20px;
@@ -97,13 +94,13 @@ export default {
     .main--sidebar{
         height: 80vh;
         overflow: hidden;
-      
+
     }
     .list-group{
-    
+
     }
     .search--bar-wrapper{
-        overflow-y: scroll; 
+        overflow-y: scroll;
         height: 100%;
     }
 

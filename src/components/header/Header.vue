@@ -6,17 +6,17 @@
         </div>
         <ul>
             <li>
-                <router-link to="/dashboard" class="nav-link" activeClass="active">Dashboard</router-link>
+                <router-link v-if="auth" to="/dashboard" class="nav-link" activeClass="active">Dashboard</router-link>
             </li>
             <li>
-                <router-link to="/signup" class="nav-link" activeClass="active">Sign Up</router-link>
+                <router-link v-if="!auth" to="/signup" class="nav-link" activeClass="active">Sign Up</router-link>
             </li>
             <li >
-                <router-link to="/signin" class="nav-link" activeClass="active">Sign In</router-link>
+                <router-link v-if="!auth" to="/signin" class="nav-link" activeClass="active">Sign In</router-link>
             </li>
             <li>
-                <button @click="logout" class="logout nav-link">Logout</button>  
-            </li>  
+                <button v-if="auth" @click="logout" class="logout nav-link">Logout</button>
+            </li>
         </ul>
     </nav>
   </header>
@@ -28,7 +28,7 @@ export default {
     name: 'Header',
     data () {
         return {
-        
+
         }
     },
     methods:{
@@ -38,7 +38,12 @@ export default {
         logout(){
             this.$store.dispatch('logOut')
         }
-    }
+    },
+    computed:{
+        auth(){
+            return this.$store.getters.isAuthenticated
+        }
+    },
 }
 </script>
 

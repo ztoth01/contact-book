@@ -3,7 +3,7 @@
     <div class="container">
       <Header/>
       <!-- <transition name="slide" mode="out-in"> -->
-          <router-view/>    
+          <router-view/>
       <!-- </transition>    -->
     </div>
   </div>
@@ -30,6 +30,7 @@ export default {
   },
   created() {
     this.$store.dispatch('getDbData');
+    //this.$store.dispatch('lol');
   }
 }
 </script>
@@ -52,7 +53,7 @@ h1{
 .slide-enter-active{
   opacity: 1;
   transition: all .5s;
-  animation: slide-in 1s ease-out forwards; 
+  animation: slide-in 1s ease-out forwards;
 }
 .slide-leave{
   opacity: 1;

@@ -41,7 +41,7 @@
           <p v-if="!$v.password.required">Required.</p>
         </div>
         <div class="input" :class="{invalid: $v.confirmPassword.$error}">
-          <label for="confirm-password">Confirm Password</label>  
+          <label for="confirm-password">Confirm Password</label>
           <input
                   type="password"
                   id="confirm-password"
@@ -150,7 +150,6 @@
           hobbies: this.hobbyInputs.map(hobby => hobby.value),
           profilePicture: this.profilePicture
         }
-        //console.log(formData)
         this.$store.dispatch('singUp', formData)
       }
     }
@@ -255,3 +254,6 @@
     cursor: not-allowed;
   }
 </style>
+
+
+
