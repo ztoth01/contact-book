@@ -16,8 +16,12 @@ export default new Router({
       component: Home
     },
     {
+      name: 'dashboard',
       path: '/dashboard',
-      component: Dashboard
+      component: Dashboard,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/signup',
@@ -28,8 +32,12 @@ export default new Router({
       component: Signin
     },
     {
+      name: 'profile',
       path: '/profile',
-      component: Profile
+      component: Profile,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })

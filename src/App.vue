@@ -30,7 +30,7 @@ export default {
   },
   created() {
     this.$store.dispatch('getDbData');
-    //this.$store.dispatch('lol');
+    this.$store.dispatch('autoLogIn');
   }
 }
 </script>

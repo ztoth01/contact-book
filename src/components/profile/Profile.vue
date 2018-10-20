@@ -1,6 +1,7 @@
 <template>
     <div>
-        <h1 @click="click">{{msg}}</h1>
+        <h1 @click="click">{{user.name}}</h1>
+        <p>{{msg}}</p>
     </div>
 </template>
 
@@ -25,7 +26,7 @@ export default {
     },
     computed:{
     ...mapGetters({
-            //contacts: 'getProfile'
+            user: 'getProfile'
         })
         // filterContact(){
         //     return this.contacts.filter((elem)=>{

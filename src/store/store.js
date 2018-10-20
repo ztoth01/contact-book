@@ -11,26 +11,28 @@ export const store = new Vuex.Store({
   state: {
     contacts: [],
     selectedContact: null,
-    userLoggedIn: true,
-    userId: null
+    currentUser: {}
   },
 
   //muttations
   mutations: {
-    setContacts(state, contacts) {
-      state.contacts = contacts;
+    setContacts(state, payload) {
+      state.contacts = payload;
     },
-    setSelectedContact(state, contact) {
-      state.selectedContact = contact;
+    setSelectedContact(state, payload) {
+      state.selectedContact = payload;
     },
     selectContact(state, payload) {
       state.selectedContact = state.contacts.find(elem => elem.id === payload);
     },
     logOutUser(state) {
-      state.userLoggedIn = false
+      state.currentUser = {};
     },
     setUserId(state, payload) {
-      state.userId = payload;
+      state.currentUser.id = payload;
+    },
+    setCurrentUser(state, payload) {
+      state.currentUser = payload;
     },
 
     'SET_SINGLE_CONTACT': (state) => {
@@ -46,6 +48,7 @@ export const store = new Vuex.Store({
 
   //actions
   actions: {
+
     selectContact({ commit }, payload) {
       commit('selectContact', payload);
     },
@@ -56,6 +59,7 @@ export const store = new Vuex.Store({
         .then((res) => {
           firebase.database().ref('contacts/' + res.user.uid).set(payload)
             .then(() => {
+              sessionStorage.setItem("userId", res.user.uid);
               commit('setUserId', res.user.uid);
               key = res.user.uid;
               return key;
@@ -69,7 +73,8 @@ export const store = new Vuex.Store({
               fileData.ref.getDownloadURL().then((filePath) => {
                 return firebase.database().ref('/contacts').child(key).update({ profileImage: filePath })
               });
-              router.replace('/dashboard');
+              dispatch('getUserProfile');
+              router.replace('/profile');
             })
             .catch(error => {
               alert(error.message);
@@ -77,34 +82,44 @@ export const store = new Vuex.Store({
         })
     },
 
-    logOut({ commit }) {
-      firebase.auth().signOut()
-        .then(res => {
-          //success
-        })
-        .catch(err => {
-          //error
-        });
-      commit('logOutUser');
-      router.replace('/');
-    },
-    logIn({ commit }, payload) {
+    logIn({ commit, dispatch }, payload) {
       firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
         .then((res) => {
+          sessionStorage.setItem("userId", res.user.uid);
           commit('setUserId', res.user.uid);
+          dispatch('getUserProfile');
           router.replace('/profile');
         })
         .catch((error) => {
           alert(error.message);
-          console.log(error)
         });
     },
-    getUserProfile({ commit, state }) {
-      firebase.database().ref('contacts/' + state.userId).on('value', (data) => {
-        console.log(data.val());
-        sessionStorage.setItem("user", JSON.stringify(data.val()));
+
+    autoLogIn({ dispatch }) {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          dispatch('getUserProfile');
+          router.replace('/profile');
+        } else {
+          dispatch('logOut');
+        }
       });
     },
+
+    getUserProfile({ commit, state }) {
+      let id;
+      if (state.currentUser.id) {
+        id = state.currentUser.id;
+      } else {
+        id = sessionStorage.getItem('userId');
+      }
+      firebase.database().ref('contacts/' + id).on('value', (data) => {
+        const userData = data.val();
+        const updatedData = { id, ...userData };
+        commit('setCurrentUser', updatedData);
+      });
+    },
+
     getDbData({ commit, state }) {
       firebase.database().ref("contacts/").on('value', (data) => {
         let dataTransformed = data.val(),
@@ -122,6 +137,16 @@ export const store = new Vuex.Store({
           commit('setSelectedContact', state.contacts[0])
         }
       });
+    },
+
+    logOut({ commit }) {
+      firebase.auth().signOut()
+        .then(() => {
+          sessionStorage.removeItem("userId");
+        })
+        .catch(() => { });
+      commit('logOutUser');
+      router.replace('/');
     }
   },
 
@@ -134,10 +159,10 @@ export const store = new Vuex.Store({
       return state.selectedContact;
     },
     isAuthenticated(state) {
-      return state.userLoggedIn !== false
+      return state.currentUser.id;
     },
     getProfile: state => {
-      //return state.
+      return state.currentUser;
     }
   }
 });
