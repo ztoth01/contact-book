@@ -11,15 +11,6 @@ Vue.config.productionTip = false;
 Vue.use(Vuelidate);
 Vue.component('Spinner', Spinner);
 
-// router.beforeEach((to, from, next) => {
-//   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-//   if (requiresAuth) {
-//     next('/signin');
-//   } else {
-//     next();
-//   }
-// });
-
 new Vue({
   store,
   router,

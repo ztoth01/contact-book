@@ -150,7 +150,7 @@
           hobbies: this.hobbyInputs.map(hobby => hobby.value),
           profilePicture: this.profilePicture
         }
-        this.$store.dispatch('singUp', formData)
+        this.$store.dispatch('singUp', formData);
       }
     }
   }

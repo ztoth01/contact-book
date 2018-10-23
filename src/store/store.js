@@ -31,18 +31,12 @@ export const store = new Vuex.Store({
     setUserId(state, payload) {
       state.currentUser.id = payload;
     },
+    setUserRefreshToken(state, payload) {
+      state.currentUser.refreshToken = payload;
+    },
     setCurrentUser(state, payload) {
       state.currentUser = payload;
-    },
-
-    'SET_SINGLE_CONTACT': (state) => {
-      state.selectedContact = state.contacts[0];
-      if (state.contacts.length > 0) {
-        state.selectedContact = '';
-      } else {
-        state.selectedContact = state.contacts[0];
-      }
-    },
+    }
   },
 
 
@@ -83,20 +77,29 @@ export const store = new Vuex.Store({
     },
 
     logIn({ commit, dispatch }, payload) {
-      firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
-        .then((res) => {
-          sessionStorage.setItem("userId", res.user.uid);
-          commit('setUserId', res.user.uid);
-          dispatch('getUserProfile');
-          router.replace('/profile');
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(() => {
+          return firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+            .then((res) => {
+              sessionStorage.setItem("userId", res.user.uid);
+              commit('setUserId', res.user.uid);
+              dispatch('getUserProfile');
+              router.replace('/profile');
+            })
+            .catch((error) => {
+              alert(error.message);
+            });
         })
         .catch((error) => {
-          alert(error.message);
+          // Handle Errors here.
+          //const errorCode = error.code;
+          //const errorMessage = error.message;
         });
+
     },
 
     autoLogIn({ dispatch }) {
-      firebase.auth().onAuthStateChanged(function (user) {
+      firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           dispatch('getUserProfile');
           router.replace('/profile');
@@ -106,6 +109,7 @@ export const store = new Vuex.Store({
       });
     },
 
+    // Get current user profile
     getUserProfile({ commit, state }) {
       let id;
       if (state.currentUser.id) {
@@ -119,7 +123,7 @@ export const store = new Vuex.Store({
         commit('setCurrentUser', updatedData);
       });
     },
-
+    // Get all contact data
     getDbData({ commit, state }) {
       firebase.database().ref("contacts/").on('value', (data) => {
         let dataTransformed = data.val(),

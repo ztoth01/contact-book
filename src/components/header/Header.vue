@@ -14,6 +14,10 @@
             <li >
                 <router-link v-if="!auth" to="/signin" class="nav-link" activeClass="active">Sign In</router-link>
             </li>
+            <li >
+                <router-link v-if="auth" to="/profile" class="nav-link" activeClass="active">Profile</router-link>
+            </li>
+            <li>
             <li>
                 <button v-if="auth" @click="logout" class="logout nav-link">Logout</button>
             </li>
@@ -36,7 +40,8 @@ export default {
             this.$store.dispatch('saveData');
         },
         logout(){
-            this.$store.dispatch('logOut')
+            //this.$store.dispatch('userHasLoggedOut');
+            this.$store.dispatch('logOut');
         }
     },
     computed:{
@@ -98,9 +103,10 @@ export default {
     color: white;
   }
 
-  li a:hover,
-  li a:active,
-  li a.router-link-active {
+    li a:hover,
+    li a:active,
+    li a.active,
+    li a.router-link-active {
     color: #fa923f;
   }
 </style>
