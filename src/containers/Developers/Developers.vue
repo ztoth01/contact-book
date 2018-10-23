@@ -7,14 +7,17 @@
 
 <script>
 
-import Sidebar from './Sidebar.vue'
-import Main from './Main.vue'
+import Sidebar from './Sidebar.vue';
+import Main from './Main.vue';
 
 export default {
-  name: 'Dashboard',
+  name: 'Developers',
   components: {
     Sidebar,
     Main
+  },
+  created(){
+    this.$store.dispatch('getDbData');
   }
 }
 </script>

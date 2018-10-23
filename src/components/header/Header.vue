@@ -1,24 +1,26 @@
 <template>
-  <header id="header" class="container-fluid">
+  <header id="header" class="">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="logo">
-            <router-link to="/">Contact Book</router-link>
+            <router-link to="/">Skills Matrix</router-link>
         </div>
         <ul>
             <li>
-                <router-link v-if="auth" to="/dashboard" class="nav-link" activeClass="active">Dashboard</router-link>
+                <router-link to="/skills-matrix" class="nav-link" activeClass="active">Skills Matrix</router-link>
             </li>
             <li>
+                <router-link to="/developers" class="nav-link" activeClass="active">Developers</router-link>
+            </li>
+            <li :class="{'is--hidden': auth }">
                 <router-link v-if="!auth" to="/signup" class="nav-link" activeClass="active">Sign Up</router-link>
             </li>
-            <li >
+            <li :class="{'is--hidden': auth }">
                 <router-link v-if="!auth" to="/signin" class="nav-link" activeClass="active">Sign In</router-link>
             </li>
-            <li >
-                <router-link v-if="auth" to="/profile" class="nav-link" activeClass="active">Profile</router-link>
+            <li :class="{'is--hidden': !auth }">
+                <router-link v-if="auth" to="/profile" class="nav-link" activeClass="active">My profile</router-link>
             </li>
-            <li>
-            <li>
+            <li :class="{'is--hidden': !auth }">
                 <button v-if="auth" @click="logout" class="logout nav-link">Logout</button>
             </li>
         </ul>
@@ -32,7 +34,7 @@ export default {
     name: 'Header',
     data () {
         return {
-
+            red: true
         }
     },
     methods:{
@@ -60,7 +62,12 @@ export default {
     flex-flow: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .is--hidden{
+      display: none;
   }
 
   .logo {
@@ -90,6 +97,8 @@ export default {
     padding: 0;
     height: 100%;
     display: flex;
+    flex: 1;
+    justify-content: flex-end;
     flex-flow: row;
     align-items: center;
   }
