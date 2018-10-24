@@ -1,3 +1,19 @@
+// import Vue from 'vue'
+// import Vuex from 'vuex'
+
+// Vue.use(Vuex)
+
+// export default new Vuex.Store({
+//   state: {
+
+//   },
+//   mutations: {
+
+//   },
+//   actions: {
+
+//   }
+// })
 import Vue from 'vue';
 import Vuex from 'vuex';
 import * as firebase from 'firebase';
@@ -125,7 +141,6 @@ export const store = new Vuex.Store({
     },
     // Get all contact data
     getDbData({ commit, state }) {
-      console.log('helloka');
       firebase.database().ref("contacts/").on('value', (data) => {
         let dataTransformed = data.val(),
           contacts = [];

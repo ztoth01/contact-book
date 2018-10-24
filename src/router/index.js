@@ -1,13 +1,13 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from 'vue'
+import Router from 'vue-router'
 import * as Firebase from 'firebase';
 
-import Signup from '@/containers/Auth/Signup.vue';
-import Signin from '@/containers/Auth/Signin.vue';
-import Developers from '@/containers/Developers/Developers.vue';
+import Signup from '@/views/Auth/Signup.vue';
+import Signin from '@/views/Auth/Signin.vue';
+import Developers from '@/views/Developers/Developers.vue';
 import Home from '@/components/Home.vue';
-import Profile from '@/containers/Profile/Profile.vue';
-import SkillsMatrix from '@/containers/SkillsMatrix/SkillsMatrix.vue';
+import Profile from '@/views/Profile/Profile.vue';
+import SkillsMatrix from '@/views/SkillsMatrix/SkillsMatrix.vue';
 
 Vue.use(Router)
 
@@ -68,3 +68,24 @@ const router = new Router({
 });
 
 export default router;
+
+
+// export default new Router({
+//   mode: 'history',
+//   base: process.env.BASE_URL,
+//   routes: [
+//     {
+//       path: '/',
+//       name: 'home',
+//       component: Home
+//     },
+//     {
+//       path: '/about',
+//       name: 'about',
+//       // route level code-splitting
+//       // this generates a separate chunk (about.[hash].js) for this route
+//       // which is lazy-loaded when the route is visited.
+//       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+//     }
+//   ]
+// })

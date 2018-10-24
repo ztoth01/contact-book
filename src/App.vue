@@ -11,12 +11,12 @@
 
 <script>
 
-import Developers from '@/containers/Developers/Developers.vue';
+import Developers from '@/views/Developers/Developers.vue';
 import Footer from '@/components/Footer.vue';
 import Header from '@/components/Header/Header.vue';
-import Home from '@/components/Home.vue'
-import Signup from '@/containers/Auth/Signup.vue';
-import Signin from '@/containers/Auth/Signin.vue';
+import Home from '@/views/Home.vue'
+import Signup from '@/views/Auth/Signup.vue';
+import Signin from '@/views/Auth/Signin.vue';
 
 export default {
   name: 'app',
@@ -34,7 +34,9 @@ export default {
 }
 </script>
 
-<style>
+
+
+<style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
