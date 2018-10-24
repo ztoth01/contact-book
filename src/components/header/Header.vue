@@ -6,7 +6,7 @@
         </div>
         <ul>
             <li>
-                <router-link to="/skills-matrix" class="nav-link" activeClass="active">Skills Matrix</router-link>
+                <router-link to="/skills-matrix" class="nav-link" activeClass="active">Matrix</router-link>
             </li>
             <li>
                 <router-link to="/developers" class="nav-link" activeClass="active">Developers</router-link>

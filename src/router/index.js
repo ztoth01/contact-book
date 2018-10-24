@@ -5,7 +5,7 @@ import * as Firebase from 'firebase';
 import Signup from '@/views/Auth/Signup.vue';
 import Signin from '@/views/Auth/Signin.vue';
 import Developers from '@/views/Developers/Developers.vue';
-import Home from '@/components/Home.vue';
+import Home from '@/views/Home.vue';
 import Profile from '@/views/Profile/Profile.vue';
 import SkillsMatrix from '@/views/SkillsMatrix/SkillsMatrix.vue';
 

@@ -1,4 +1,4 @@
-<template>    
+<template>
 
     <!-- <div class="jumbotron col-md-8 my-4 mx-0 main-content border-success">
         <div class="d-flex">
@@ -10,13 +10,13 @@
         <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
     </div> -->
 
-    <div class="card border-success mt-5">
+    <div class="card border-success mt-5 col-md-8">
         <div class="card-header d-flex" v-if="contact !== null">
             <span v-show="isLoad"><img @load="loaded" :src="contact.profileImage" :alt="contact.name"></span>
             <span v-show="!isLoad"><img src="@/assets/loading.gif" alt=""></span>
             <!-- <Spinner v-show="!isLoad" name="cube-grid" color="#d14f65"/> -->
             <h1 class="display-3">{{ contact.name }}</h1>
-            
+
         </div>
         <div class="card-body">
             <!-- <h4 class="card-title display-3">{{ contact.name }}</h4> -->
@@ -43,7 +43,7 @@ export default {
                 this.isLoad = true
             }, 1000);
         }
-    
+
   },
   computed:{
     ...mapGetters({
