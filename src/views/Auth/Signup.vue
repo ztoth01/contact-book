@@ -3,15 +3,16 @@
     <div class="signup-form mx-auto col-md-8">
       <form @submit.prevent="onSubmit">
         <!-- <span>{{ $v }}</span> -->
-        <div class="input" :class="{invalid: $v.name.$error}">
+
+        <div class="input">
           <label for="email">Name</label>
           <input
                   type="text"
                   id="name"
                   @blur="$v.name.$touch()"
                   v-model="name">
-          <p v-if="!$v.name.name">Please enter your name.</p>
-          <p v-if="!$v.name.required">Required.</p>
+          <!-- <p v-if="!$v.name.name">Please enter your name.</p>
+          <p v-if="!$v.name.required">Required.</p> -->
         </div>
         <div class="input" :class="{invalid: $v.email.$error}">
           <label for="email">Mail</label>

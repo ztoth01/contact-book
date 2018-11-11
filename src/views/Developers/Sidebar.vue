@@ -13,9 +13,8 @@
                 class="list-group-item d-flex justify-content-start align-items-center"
                 :class="{'bg-light': index % 2 === 0 }">
                 <span class="avatar">
-                    <transition>
-                        <img v-show="isLoad" :src="contact.profileImage" :alt="contact.name" @load="loaded">
-                    </transition>
+                    <img v-show="isLoad" :src="contact.profileImage" :alt="contact.name" @load="loaded">
+                    <!-- <img src="@/assets/loading.gif" alt=""> <Spinner />-->
                     <span v-show="!isLoad" ><img src="@/assets/loading.gif" alt=""></span>
                     <!-- <Spinner v-show="!isLoad" name="cube-grid" color="#d14f65"/> -->
                     <!-- http://vue-spinkit.surge.sh/ -->
@@ -32,9 +31,13 @@
 <script>
 
 import { mapGetters } from 'vuex';
+import Spinner from '../../components/Spinner';
 
 export default {
   name: 'Sidebar',
+  components: {
+    Spinner
+  },
   data () {
     return {
         searchContact:'',
@@ -78,7 +81,6 @@ export default {
     .avatar{
         height: 60px;
         width: 60px;
-        background: url()
     }
     .avatar img{
         width: 100%;

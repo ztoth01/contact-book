@@ -1,7 +1,7 @@
 <template>
   <div id="app">
+    <Header/>
     <div class="container">
-      <Header/>
       <!-- <transition name="slide" mode="out-in"> -->
           <router-view/>
       <!-- </transition>    -->
@@ -11,12 +11,12 @@
 
 <script>
 
-import Dashboard from '@/components/dashboard/Dashboard.vue'
-import Footer from '@/components/Footer.vue'
-import Header from '@/components/header/Header.vue'
-import Home from '@/components/Home.vue'
-import Signup from '@/components/auth/Signup.vue'
-import Signin from '@/components/auth/Signin.vue'
+import Developers from '@/views/Developers/Developers.vue';
+import Footer from '@/components/Footer.vue';
+import Header from '@/components/Header/Header.vue';
+import Home from '@/views/Home.vue'
+import Signup from '@/views/Auth/Signup.vue';
+import Signin from '@/views/Auth/Signin.vue';
 
 export default {
   name: 'app',
@@ -24,18 +24,19 @@ export default {
     Header,
     Footer,
     Home,
-    Dashboard,
+    Developers,
     Signup,
     Signin
   },
   created() {
-    this.$store.dispatch('getDbData');
     this.$store.dispatch('autoLogIn');
   }
 }
 </script>
 
-<style>
+
+
+<style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
