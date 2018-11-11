@@ -1,23 +1,13 @@
-// import Vue from 'vue'
-// import Vuex from 'vuex'
-
-// Vue.use(Vuex)
-
-// export default new Vuex.Store({
-//   state: {
-
-//   },
-//   mutations: {
-
-//   },
-//   actions: {
-
-//   }
-// })
 import Vue from 'vue';
 import Vuex from 'vuex';
 import * as firebase from 'firebase';
 import router from '../router/index';
+
+//Modulse
+import user from './modules/user/index';
+import users from './modules/user/index';
+import matrix from './modules/user/index';
+
 
 Vue.use(Vuex);
 
@@ -152,7 +142,7 @@ export const store = new Vuex.Store({
           }
         }
         commit('setContacts', contacts);
-        if (state.contacts.length > 0) {
+        if (contacts.length > 0) {
           commit('setSelectedContact', state.contacts[0])
         }
       });
@@ -183,5 +173,12 @@ export const store = new Vuex.Store({
     getProfile: state => {
       return state.currentUser;
     }
+  },
+
+  modules: {
+    user,
+    users,
+    matrix
   }
+
 });

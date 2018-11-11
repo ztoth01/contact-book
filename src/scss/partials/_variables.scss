@@ -5,3 +5,8 @@ $red: red;
   font-style: italic;
   text-decoration: underline;
 }
+
+$primaryBlue: #5bc0de;
+$primaryBlueLight: lighten($primaryBlue,20%);
+$primaryBlueDark: darken($primaryBlue,20%);
+$primaryBlueDeepDark: darken($primaryBlue,40%);
