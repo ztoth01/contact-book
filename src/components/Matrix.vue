@@ -1,7 +1,7 @@
 <template>
     <div class="matrix mx-auto">
-        <div class="matrix__column" v-for="(elem, index) in matrixData"  :key="elem">
-            <span :key="elem" class="category__title btn btn-alert alert alert-info btn-lg">{{index}}</span>
+        <div class="matrix__column" v-for="(elem, index) in matrixData"  :key="index">
+            <span  class="category__title btn btn-alert alert alert-info btn-lg">{{index}}</span>
             <transition-group
                 appear
                 @before-enter="beforeEnter"

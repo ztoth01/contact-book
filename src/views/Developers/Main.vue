@@ -47,7 +47,7 @@
                     </transition-group>
                 </div>
             </div> -->
-            <Matrix :matrixData="skillsCategories" />
+            <Matrix :matrixData="matrixData" />
         <!-- </div> -->
     </div>
 </template>
@@ -61,129 +61,126 @@ import Matrix from '../../components/Matrix';
 import * as firebase from 'firebase';
 
 export default {
-  name: 'Main',
-  components:{
-      Spinner,
-      Matrix
-  },
-  data () {
-    return {
-        delay: 1,
-        isLoad: true,
-        skillsCategories: null,
-        categoties:{
-            'Front End':{
-                'JavaScript':{
-                    level: 1,
-                    devs:{
-                        dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                        dev2: 'Fov3tloBNzZvrIwpgeXMLziny6C3',
-                        dev3: 'HyWGvtaHF0TzXESscvHehDV7J0g1'
-                    }
-
-                },
-                'Sass Css': {
-                    level: 1,
-                    devs:{
-                        dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                        dev2: 'Fov3tloBNzZvrIwpgeXMLziny6C3'
-                    }
-                },
-                'React': {
-                    level: 0,
-                    devs:{
-                        dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                    }
-                },
-                'Vue.js': {
-                    level: 2,
-                    devs:{
-                        dev1: 'Fov3tloBNzZvrIwpgeXMLziny6C3',
-                        dev2: 'HyWGvtaHF0TzXESscvHehDV7J0g1'
-                    }
-                },
-                'Webpack': {
-                    level: 1,
-                    devs: null
-                }
-            },
-            'Back End':{
-                'JavaScript': {
-                    level: 1,
-                    devs:{
-                        dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                        dev2: 'Fov3tloBNzZvrIwpgeXMLziny6C3',
-                        dev3: 'HyWGvtaHF0TzXESscvHehDV7J0g1'
-                    }
-
-                },
-                'Sass Css' : {
-                    level: 1,
-                    devs: null
-                },
-                'React': {
-                    level: 0,
-                    devs:{
-                        dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                    }
-                },
-                'Vue.js': {
-                    level: 2,
-                    devs:{
-                        dev1: 'Fov3tloBNzZvrIwpgeXMLziny6C3',
-                        dev2: 'HyWGvtaHF0TzXESscvHehDV7J0g1'
-                    }
-                },
-                'Webpack': {
-                    level: 1,
-                    devs: null
-                }
-            },
-            'Personal':{
-                'JavaScript': {
-                    level: 1,
-                    devs:{
-                        dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                        dev2: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                        dev3: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2'
-                    }
-
-                },
-                'Sass Css' : {
-                    level: 0,
-                    devs:{
-                        dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                        dev2: 'Fov3tloBNzZvrIwpgeXMLziny6C3'
-                    }
-                },
-                'React': {
-                    level: 1,
-                    devs:{
-                        dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                    }
-                },
-                'Vue.js': {
-                    level: 2,
-                    devs:{
-                        dev1: 'Fov3tloBNzZvrIwpgeXMLziny6C3',
-                        dev2: 'HyWGvtaHF0TzXESscvHehDV7J0g1'
-                    }
-                },
-                'Webpack': {
-                    level: 2,
-                    devs: null
-                }
-            }
-        },
-    }
-  },
-    methods:{
-        getSkillsDB(){
-            firebase.database().ref("skillsCategories/").on('value', (data) => {
-                this.skillsCategories =  data.val();
-            });
+    name: 'Main',
+    props:{
+        matrixData:{
+            type: Object,
+            required: true
         }
+    },
+    components:{
+        Spinner,
+        Matrix
+    },
+    data () {
+        return {
+            delay: 1,
+            isLoad: true,
+            categoties:{
+                'Front End':{
+                    'JavaScript':{
+                        level: 1,
+                        devs:{
+                            dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
+                            dev2: 'Fov3tloBNzZvrIwpgeXMLziny6C3',
+                            dev3: 'HyWGvtaHF0TzXESscvHehDV7J0g1'
+                        }
 
+                    },
+                    'Sass Css': {
+                        level: 1,
+                        devs:{
+                            dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
+                            dev2: 'Fov3tloBNzZvrIwpgeXMLziny6C3'
+                        }
+                    },
+                    'React': {
+                        level: 0,
+                        devs:{
+                            dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
+                        }
+                    },
+                    'Vue.js': {
+                        level: 2,
+                        devs:{
+                            dev1: 'Fov3tloBNzZvrIwpgeXMLziny6C3',
+                            dev2: 'HyWGvtaHF0TzXESscvHehDV7J0g1'
+                        }
+                    },
+                    'Webpack': {
+                        level: 1,
+                        devs: null
+                    }
+                },
+                'Back End':{
+                    'JavaScript': {
+                        level: 1,
+                        devs:{
+                            dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
+                            dev2: 'Fov3tloBNzZvrIwpgeXMLziny6C3',
+                            dev3: 'HyWGvtaHF0TzXESscvHehDV7J0g1'
+                        }
+
+                    },
+                    'Sass Css' : {
+                        level: 1,
+                        devs: null
+                    },
+                    'React': {
+                        level: 0,
+                        devs:{
+                            dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
+                        }
+                    },
+                    'Vue.js': {
+                        level: 2,
+                        devs:{
+                            dev1: 'Fov3tloBNzZvrIwpgeXMLziny6C3',
+                            dev2: 'HyWGvtaHF0TzXESscvHehDV7J0g1'
+                        }
+                    },
+                    'Webpack': {
+                        level: 1,
+                        devs: null
+                    }
+                },
+                'Personal':{
+                    'JavaScript': {
+                        level: 1,
+                        devs:{
+                            dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
+                            dev2: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
+                            dev3: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2'
+                        }
+
+                    },
+                    'Sass Css' : {
+                        level: 0,
+                        devs:{
+                            dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
+                            dev2: 'Fov3tloBNzZvrIwpgeXMLziny6C3'
+                        }
+                    },
+                    'React': {
+                        level: 1,
+                        devs:{
+                            dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
+                        }
+                    },
+                    'Vue.js': {
+                        level: 2,
+                        devs:{
+                            dev1: 'Fov3tloBNzZvrIwpgeXMLziny6C3',
+                            dev2: 'HyWGvtaHF0TzXESscvHehDV7J0g1'
+                        }
+                    },
+                    'Webpack': {
+                        level: 2,
+                        devs: null
+                    }
+                }
+            },
+        }
     },
     computed:{
     ...mapGetters({
@@ -194,7 +191,6 @@ export default {
         if(this.contact === null){
             this.isLoad = false;
         }
-       this.getSkillsDB();
     },
     watch:{
         contact(){

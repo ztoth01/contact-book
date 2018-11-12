@@ -3,11 +3,10 @@ import Vuex from 'vuex';
 import * as firebase from 'firebase';
 import router from '../router/index';
 
-//Modulse
-import user from './modules/user/index';
-import users from './modules/user/index';
-import matrix from './modules/user/index';
-
+//Modules
+// import userModule from './modules/user/index';
+// import usersModule from './modules/users/index';
+import matrix from './modules/matrix/matrix';
 
 Vue.use(Vuex);
 
@@ -128,7 +127,7 @@ export const store = new Vuex.Store({
         commit('setCurrentUser', updatedData);
       });
     },
-    // Get all contact data
+    // // Get all contact data
     getDbData({ commit, state }) {
       firebase.database().ref("contacts/").on('value', (data) => {
         let dataTransformed = data.val(),
@@ -176,8 +175,8 @@ export const store = new Vuex.Store({
   },
 
   modules: {
-    user,
-    users,
+    //user,
+    //users,
     matrix
   }
 
