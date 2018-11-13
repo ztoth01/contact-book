@@ -1,5 +1,7 @@
 <template>
     <div class="d-flex flex-wrap">
+        <Overlay/>
+        <Modal />
         <Sidebar/>
         <Main v-if="matrixData" :matrixData="matrixData" />
     </div>
@@ -9,16 +11,19 @@
 
 import Sidebar from './Sidebar.vue';
 import Main from './Main.vue';
+import Overlay from '../../components/UI/Overlay';
+import Modal from '../../components/UI/Modal';
 import { mapGetters } from 'vuex';
 
 export default {
     name: 'Developers',
     components: {
         Sidebar,
-        Main
+        Main,
+        Modal,
+        Overlay
     },
     created(){
-        this.$store.dispatch('getDbData');
         this.$store.dispatch('getGlobaMatricDbFromFirebase');
     },
     computed:{

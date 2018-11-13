@@ -1,38 +1,21 @@
 <template>
     <div class="matrix mx-auto">
         <div class="matrix__column" v-for="(elem, index) in matrixData"  :key="index">
+
             <span  class="category__title btn btn-alert alert alert-info btn-lg">{{index}}</span>
-            <transition-group
-                appear
-                @before-enter="beforeEnter"
-                @enter="enter"
-                @after-enter="afterEnter"
-                @before-leave="beforeLeave"
-                @leave="leave"
-                @afterLeave="afterLeave"
-                tag="div"
-            >
-            <span v-for="(item, i) in elem"
-                :class="'category__' + item.level || '2'"
-                :key="i"
-                class="btn btn-alert alert alert-info btn-sm dev-name">{{i}}
-                <!-- <span v-if="item.devs">
-                    :class="'category__' + item.level"
-                    <ul v-for="dev in item.devs" :key="dev">
-                        <li>{{ dev }}</li>
-                    </ul>
-                </span> -->
-            </span>
-            </transition-group>
+
+            <MatrixList :listData="elem" />
+
         </div>
     </div>
 </template>
 
-
-
 <script>
 
 import * as firebase from 'firebase';
+import { mapGetters } from 'vuex';
+import MatrixList from '../components/matrix/MatrixList'
+
 export default {
     name: 'Matrix',
     props:{
@@ -41,29 +24,21 @@ export default {
             required: true
         }
     },
+    components:{
+        MatrixList
+    },
     data () {
         return{
-            delay: 1
-            //matrixData: null
+            delay: 1,
+            dev: null
         }
     },
     methods:{
-        // getDbData() {
-        //     firebase.database().ref("skillsCategories/").on('value', (data) => {
-        //         let dataTransformed = data.val(),
-        //         skillsCategories = [];
-        //         console.log(dataTransformed);
-        //         this.matrixData = dataTransformed;
-        //         // for (var key in dataTransformed) {
-        //         //     let singleContact = {};
-        //         //     if (dataTransformed.hasOwnProperty(key)) {
-        //         //         singleContact = dataTransformed[key];
-        //         //         singleContact.id = key;
-        //         //         contacts.push(singleContact);
-        //         //     }
-        //         // }
-        //     });
-        // },
+        showName(id){
+            return this.contacts.filter((dev)=>{
+                this.dev == dev.id.match(id)
+            });
+        },
         beforeEnter(el) {
             el.style.opacity = 0
             el.style.top = '50%'
@@ -93,8 +68,15 @@ export default {
         afterLeave(el) {
         }
     },
-    created() {
-        //this.getDbData();
+    computed:{
+    ...mapGetters({
+            contacts: 'getContacts'
+        }),
+        devName(){
+            return this.contacts.filter((elem)=>{
+                return elem.id.match(this.searchContact.toLowerCase())
+            });
+        }
     }
 
 }

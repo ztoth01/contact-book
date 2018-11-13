@@ -7,6 +7,7 @@ import router from '../router/index';
 // import userModule from './modules/user/index';
 // import usersModule from './modules/users/index';
 import matrix from './modules/matrix/matrix';
+import ui from './modules/ui/ui';
 
 Vue.use(Vuex);
 
@@ -99,7 +100,6 @@ export const store = new Vuex.Store({
           //const errorCode = error.code;
           //const errorMessage = error.message;
         });
-
     },
 
     autoLogIn({ dispatch }) {
@@ -132,7 +132,7 @@ export const store = new Vuex.Store({
       firebase.database().ref("contacts/").on('value', (data) => {
         let dataTransformed = data.val(),
           contacts = [];
-        for (var key in dataTransformed) {
+        for (let key in dataTransformed) {
           let singleContact = {};
           if (dataTransformed.hasOwnProperty(key)) {
             singleContact = dataTransformed[key];
@@ -177,7 +177,8 @@ export const store = new Vuex.Store({
   modules: {
     //user,
     //users,
-    matrix
+    matrix,
+    ui
   }
 
 });

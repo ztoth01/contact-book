@@ -27,26 +27,6 @@
             </div>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 
-            <!-- <div class="matrix mx-auto">
-                <div class="matrix__column" v-for="(elem, index) in categoties"  :key="index">
-                    <span :key="elem.title" class="category__title btn btn-alert alert alert-info btn-lg">{{elem.title}}</span>
-                    <transition-group
-                        appear
-                        @before-enter="beforeEnter"
-                        @enter="enter"
-                        @after-enter="afterEnter"
-                        @before-leave="beforeLeave"
-                        @leave="leave"
-                        @afterLeave="afterLeave"
-                        tag="div"
-                    >
-                    <span v-for="(item, i) in elem.subCat"
-                        :data-index="index"
-                        :class="'category__' + item"
-                        :key="i + 20" class="btn btn-alert alert alert-info btn-sm">{{i}}</span>
-                    </transition-group>
-                </div>
-            </div> -->
             <Matrix :matrixData="matrixData" />
         <!-- </div> -->
     </div>
@@ -58,7 +38,6 @@ import { mapGetters } from 'vuex';
 import { TweenLite } from 'gsap';
 import Spinner from '../../components/Spinner';
 import Matrix from '../../components/Matrix';
-import * as firebase from 'firebase';
 
 export default {
     name: 'Main',
@@ -76,110 +55,6 @@ export default {
         return {
             delay: 1,
             isLoad: true,
-            categoties:{
-                'Front End':{
-                    'JavaScript':{
-                        level: 1,
-                        devs:{
-                            dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                            dev2: 'Fov3tloBNzZvrIwpgeXMLziny6C3',
-                            dev3: 'HyWGvtaHF0TzXESscvHehDV7J0g1'
-                        }
-
-                    },
-                    'Sass Css': {
-                        level: 1,
-                        devs:{
-                            dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                            dev2: 'Fov3tloBNzZvrIwpgeXMLziny6C3'
-                        }
-                    },
-                    'React': {
-                        level: 0,
-                        devs:{
-                            dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                        }
-                    },
-                    'Vue.js': {
-                        level: 2,
-                        devs:{
-                            dev1: 'Fov3tloBNzZvrIwpgeXMLziny6C3',
-                            dev2: 'HyWGvtaHF0TzXESscvHehDV7J0g1'
-                        }
-                    },
-                    'Webpack': {
-                        level: 1,
-                        devs: null
-                    }
-                },
-                'Back End':{
-                    'JavaScript': {
-                        level: 1,
-                        devs:{
-                            dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                            dev2: 'Fov3tloBNzZvrIwpgeXMLziny6C3',
-                            dev3: 'HyWGvtaHF0TzXESscvHehDV7J0g1'
-                        }
-
-                    },
-                    'Sass Css' : {
-                        level: 1,
-                        devs: null
-                    },
-                    'React': {
-                        level: 0,
-                        devs:{
-                            dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                        }
-                    },
-                    'Vue.js': {
-                        level: 2,
-                        devs:{
-                            dev1: 'Fov3tloBNzZvrIwpgeXMLziny6C3',
-                            dev2: 'HyWGvtaHF0TzXESscvHehDV7J0g1'
-                        }
-                    },
-                    'Webpack': {
-                        level: 1,
-                        devs: null
-                    }
-                },
-                'Personal':{
-                    'JavaScript': {
-                        level: 1,
-                        devs:{
-                            dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                            dev2: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                            dev3: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2'
-                        }
-
-                    },
-                    'Sass Css' : {
-                        level: 0,
-                        devs:{
-                            dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                            dev2: 'Fov3tloBNzZvrIwpgeXMLziny6C3'
-                        }
-                    },
-                    'React': {
-                        level: 1,
-                        devs:{
-                            dev1: 'BD2sOiwZhoN1V7FsV4RCRCQIO9z2',
-                        }
-                    },
-                    'Vue.js': {
-                        level: 2,
-                        devs:{
-                            dev1: 'Fov3tloBNzZvrIwpgeXMLziny6C3',
-                            dev2: 'HyWGvtaHF0TzXESscvHehDV7J0g1'
-                        }
-                    },
-                    'Webpack': {
-                        level: 2,
-                        devs: null
-                    }
-                }
-            },
         }
     },
     computed:{
