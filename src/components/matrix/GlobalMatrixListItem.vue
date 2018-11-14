@@ -56,8 +56,8 @@ export default {
         ...mapMutations(['setDevsForModal','openOverlay','openModal']),
         clicked(data){
             this.setDevsForModal({...data});
-            this.openOverlay();
             this.openModal();
+            this.openOverlay();
         },
         beforeEnter(el) {
             el.style.opacity = 0

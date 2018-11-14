@@ -2,7 +2,7 @@
     <transition>
         <div
             class="overlay"
-            @click="closeOverlay"
+            @click="clicked"
             :class="[overlayIsVisible ? 'visible' : 'hidden']">
         </div>
     </transition>
@@ -12,8 +12,11 @@
 import { mapGetters, mapMutations} from 'vuex';
 export default {
     methods:{
-        ...mapMutations(['closeOverlay']),
-
+        ...mapMutations(['closeOverlay','closeModal']),
+        clicked(){
+            this.closeOverlay();
+            this.closeModal();
+        },
         beforeEnter(el) {
             //el.classList.add('slide-enter-active')
         },

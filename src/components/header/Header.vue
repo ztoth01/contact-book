@@ -18,7 +18,7 @@
                 <router-link v-if="!auth" to="/signin" class="nav-link" activeClass="active">Sign In</router-link>
             </li>
             <li :class="{'is--hidden': !auth }">
-                <router-link v-if="auth" to="/profile" class="nav-link" activeClass="active">My profile</router-link>
+                <router-link v-if="auth" to="/my-profile" class="nav-link" activeClass="active">My profile</router-link>
             </li>
             <li :class="{'is--hidden': !auth }">
                 <button v-if="auth" @click="logout" class="logout nav-link">Logout</button>

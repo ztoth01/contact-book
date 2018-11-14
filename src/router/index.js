@@ -6,7 +6,8 @@ import Signup from '@/views/Auth/Signup.vue';
 import Signin from '@/views/Auth/Signin.vue';
 import Developers from '@/views/Developers/Developers.vue';
 import Home from '@/views/Home.vue';
-import Profile from '@/views/Profile/Profile.vue';
+import MyProfile from '@/views/MyProfile/MyProfile.vue';
+import DevProfile from '@/views/DevProfile/DevProfile.vue';
 import SkillsMatrix from '@/views/SkillsMatrix/SkillsMatrix.vue';
 
 Vue.use(Router)
@@ -48,9 +49,14 @@ const router = new Router({
       component: Signin
     },
     {
-      name: 'profile',
-      path: '/profile',
-      component: Profile,
+      name: 'dev-profile',
+      path: '/dev-profile/:id',
+      component: DevProfile
+    },
+    {
+      name: 'my-profile',
+      path: '/my-profile',
+      component: MyProfile,
       meta: {
         requiresAuth: true
       },

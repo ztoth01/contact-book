@@ -8,9 +8,12 @@
         <div class="card-body">
             <ul class="list-group">
                 <li
-                    v-for="dev in devsForModal" :key="dev['id']"
+                    @click="clicked"
+                    v-for="dev in devsForModal" :key="dev.id"
                     class="list-group-item d-flex justify-content-between align-items-center">
+                    <router-link :to="'/dev-profile/' + dev.id" class="nav-link" activeClass="active">
                     {{dev.name}}
+                    </router-link>
                 </li>
             </ul>
         </div>
@@ -28,6 +31,7 @@ export default {
             contacts: 'getContacts',
             devs: 'getDevsForModal'
         }),
+        ...mapMutations(['setDevsForModal','closeOverlay','closeModal']),
         devsForModal(){
             if(this.devs !== null){
                 return [].concat(...Object.values(this.devs).map( e => {
@@ -41,8 +45,8 @@ export default {
     methods:{
         ...mapMutations(['setModalState','setOverlayState']),
         clicked(){
-            // this.setModalState();
-            // this.setOverlayState();
+            this.closeOverlay();
+            this.closeModal();
         },
         beforeEnter(el) {
             //el.classList.add('slide-enter-active')

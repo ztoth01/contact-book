@@ -73,7 +73,7 @@ export const store = new Vuex.Store({
                 return firebase.database().ref('/contacts').child(key).update({ profileImage: filePath })
               });
               dispatch('getUserProfile');
-              router.replace('/profile');
+              router.replace('/my-profile');
             })
             .catch(error => {
               alert(error.message);
@@ -89,7 +89,7 @@ export const store = new Vuex.Store({
               sessionStorage.setItem("userId", res.user.uid);
               commit('setUserId', res.user.uid);
               dispatch('getUserProfile');
-              router.replace('/profile');
+              router.replace('/my-profile');
             })
             .catch((error) => {
               alert(error.message);
@@ -106,7 +106,7 @@ export const store = new Vuex.Store({
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           dispatch('getUserProfile');
-          router.replace('/profile');
+          router.replace('/my-profile');
         } else {
           dispatch('logOut');
         }
@@ -171,7 +171,8 @@ export const store = new Vuex.Store({
     },
     getProfile: state => {
       return state.currentUser;
-    }
+    },
+
   },
 
   modules: {

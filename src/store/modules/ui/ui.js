@@ -7,23 +7,17 @@ export default {
   },
 
   mutations: {
-    setModalState(state) {
-      state.modalIsVisible = !state.modalIsVisible;
-    },
-    setOverlayState(state) {
-      state.overlayIsVisible = !state.overlayIsVisible;
-    },
-    closeModal(state) {
-      state.modalIsVisible = false;
-    },
     openModal(state) {
       state.modalIsVisible = true;
     },
-    closeOverlay(state) {
-      state.modalIsVisible = false;
+    closeModal(state) {
+      state.overlayIsVisible = false;
     },
     openOverlay(state) {
-      state.modalIsVisible = true;
+      state.overlayIsVisible = true;
+    },
+    closeOverlay(state) {
+      state.overlayIsVisible = false;
     },
     setDevsForModal(state, payload) {
       state.devsForModal = payload
