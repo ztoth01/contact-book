@@ -136,6 +136,7 @@ export const store = new Vuex.Store({
           let singleContact = {};
           if (dataTransformed.hasOwnProperty(key)) {
             singleContact = dataTransformed[key];
+            //console.log(dataTransformed[key].confirmPassword);
             singleContact.id = key;
             contacts.push(singleContact);
           }
@@ -183,3 +184,32 @@ export const store = new Vuex.Store({
   }
 
 });
+
+
+
+
+ // $$$$$$$$$$
+ //let devs = {};
+// let x = dispatch('gedDevsIdWithThisSkill', skillsCategories);
+// console.log(x);
+
+// gedDevsIdWithThisSkill({ state, commit, rootState }, payload) {
+//   for (let i in skillsCategories[key]) {
+//     let devs = {},
+//       index = 0;
+
+//     rootState.contacts.map((elem) => {
+//       if (elem['skillsMatrix'] !== 0) {
+//         for (let key in elem['skillsMatrix']) {
+//           if (elem['skillsMatrix'].hasOwnProperty(key)) {
+//             if (elem['skillsMatrix'][key][i] !== undefined && elem['skillsMatrix'][key][i].level > 0) {
+//               index++;
+//               devs['dev' + index] = elem.id;
+//             }
+//           }
+//         }
+//       }
+//     });
+//     return devs;
+//   }
+// },

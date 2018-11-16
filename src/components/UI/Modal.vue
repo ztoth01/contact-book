@@ -9,10 +9,14 @@
             <ul class="list-group">
                 <li
                     @click="clicked"
-                    v-for="dev in devsForModal" :key="dev.id"
+                    v-for="(dev, index) in devsForModal" :key="dev.id"
+                    :class="{'bg-light': index % 2 === 0 }"
                     class="list-group-item d-flex justify-content-between align-items-center">
                     <router-link :to="'/dev-profile/' + dev.id" class="nav-link" activeClass="active">
-                    {{dev.name}}
+                        <span class="avatar">
+                            <img  :src="dev.profileImage" :alt="dev.name">
+                        </span>
+                        {{dev.name}}
                     </router-link>
                 </li>
             </ul>
@@ -31,7 +35,6 @@ export default {
             contacts: 'getContacts',
             devs: 'getDevsForModal'
         }),
-        ...mapMutations(['setDevsForModal','closeOverlay','closeModal']),
         devsForModal(){
             if(this.devs !== null){
                 return [].concat(...Object.values(this.devs).map( e => {
@@ -43,10 +46,10 @@ export default {
         }
     },
     methods:{
-        ...mapMutations(['setModalState','setOverlayState']),
+        ...mapMutations(['setDevsForModal','closeOverlay','closeModal']),
         clicked(){
-            this.closeOverlay();
-            this.closeModal();
+            this.$store.commit('closeOverlay');
+            this.$store.commit('closeModal');
         },
         beforeEnter(el) {
             //el.classList.add('slide-enter-active')
@@ -72,7 +75,6 @@ export default {
 <style lang="scss" scoped>
     .modal{
         max-width: 500px;
-        //position: fixed;
         left:0;
         top:0;
         right: 0;
@@ -83,10 +85,11 @@ export default {
         max-height: 300px;
         overflow-y: scroll;
 
-        & > div {
-            //overflow-y: scroll;
+        & a{
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
         }
-
 
         &.visible{
             opacity: 1;
@@ -95,6 +98,15 @@ export default {
         &.hidden{
             opacity: 0;
             visibility: hidden;
+        }
+        .avatar{
+            height: 60px;
+            width: 60px;
+        }
+        .avatar img{
+            width: 100%;
+            height: auto;
+            display: block;
         }
     }
 </style>

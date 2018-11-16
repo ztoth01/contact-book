@@ -24,7 +24,7 @@ export default {
         Overlay
     },
     created(){
-        this.$store.dispatch('getGlobaMatricDbFromFirebase');
+        //this.$store.dispatch('getGlobaMatrixDbFromFirebase');
     },
     computed:{
         ...mapGetters({

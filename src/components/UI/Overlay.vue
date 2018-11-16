@@ -14,8 +14,8 @@ export default {
     methods:{
         ...mapMutations(['closeOverlay','closeModal']),
         clicked(){
-            this.closeOverlay();
-            this.closeModal();
+            this.$store.commit('closeOverlay');
+            this.$store.commit('closeModal');
         },
         beforeEnter(el) {
             //el.classList.add('slide-enter-active')

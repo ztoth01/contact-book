@@ -23,7 +23,7 @@ export default {
         Modal
     },
     created(){
-        this.$store.dispatch('getGlobaMatricDbFromFirebase');
+        this.$store.dispatch('getGlobaMatrixDbFromFirebase');
     },
     computed:{
         ...mapGetters({

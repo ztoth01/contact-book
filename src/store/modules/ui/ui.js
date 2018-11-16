@@ -3,7 +3,8 @@ export default {
   state: {
     modalIsVisible: false,
     overlayIsVisible: false,
-    devsForModal: null
+    devsForModal: null,
+    skillToLookFor: null
   },
 
   mutations: {
@@ -11,7 +12,7 @@ export default {
       state.modalIsVisible = true;
     },
     closeModal(state) {
-      state.overlayIsVisible = false;
+      state.modalIsVisible = false;
     },
     openOverlay(state) {
       state.overlayIsVisible = true;
@@ -20,7 +21,10 @@ export default {
       state.overlayIsVisible = false;
     },
     setDevsForModal(state, payload) {
-      state.devsForModal = payload
+      state.devsForModal = payload;
+    },
+    setSkillToLookFor(state, payload) {
+      state.skillToLookFor = payload;
     }
   },
 
@@ -38,6 +42,12 @@ export default {
     getDevsForModal: state => {
       return state.devsForModal;
     },
-
   }
 }
+
+
+
+
+
+
+

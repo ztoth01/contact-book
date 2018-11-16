@@ -31,6 +31,7 @@ export default {
   created() {
     this.$store.dispatch('autoLogIn');
     this.$store.dispatch('getDbData');
+    this.$store.dispatch('getGlobaMatrixDbFromFirebase');
   }
 }
 </script>
