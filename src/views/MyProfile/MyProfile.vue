@@ -1,13 +1,17 @@
 <template>
     <div>
+        <Overlay/>
         <h1 @click="click">{{user.name}}</h1>
         <p>{{msg}}</p>
+        <SkillRegistryForm />
     </div>
 </template>
 
 <script>
 
 import { mapGetters } from 'vuex';
+import SkillRegistryForm from '../../components/SkillRegister/SkillRegistryForm';
+import Overlay from '../../components/UI/Overlay';
 
 export default {
 
@@ -15,6 +19,10 @@ export default {
         return{
             msg:'Hello'
         }
+    },
+    components:{
+        SkillRegistryForm,
+        Overlay
     },
     created() {
         this.$store.dispatch('getUserProfile');
