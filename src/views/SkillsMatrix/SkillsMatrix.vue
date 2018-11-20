@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Overlay/>
+        <Overlay :closeExtraElement="closeModal" />
         <Modal />
         <h1>This is the Skills Matrix page.</h1>
         <Matrix v-if="matrixData" :matrixData="matrixData" />
@@ -9,7 +9,7 @@
 
 <script>
 
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import Matrix from '../../components/Matrix';
 import Overlay from '../../components/UI/Overlay';
 import Modal from '../../components/UI/Modal';
@@ -24,6 +24,12 @@ export default {
     },
     created(){
         this.$store.dispatch('getGlobaMatrixDbFromFirebase');
+    },
+    methods:{
+        ...mapMutations(['closeModal']),
+        closeModal(){
+            this.$store.commit('closeModal');
+        }
     },
     computed:{
         ...mapGetters({

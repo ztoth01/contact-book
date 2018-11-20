@@ -11,11 +11,21 @@
 <script>
 import { mapGetters, mapMutations} from 'vuex';
 export default {
+    props:{
+        closeExtraElement:{
+            type: Function,
+            required: false
+        }
+    },
     methods:{
-        ...mapMutations(['closeOverlay','closeModal']),
+        ...mapMutations(['closeOverlay']),
         clicked(){
             this.$store.commit('closeOverlay');
-            this.$store.commit('closeModal');
+            //that is how you referenc the function to close different stuff
+            //this.$store.commit('closeModal');
+            if(this.closeExtraElement){
+                this.closeExtraElement();
+            }
         },
         beforeEnter(el) {
             //el.classList.add('slide-enter-active')

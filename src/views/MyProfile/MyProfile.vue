@@ -1,7 +1,7 @@
 <template>
     <div>
-        <Overlay/>
-        <h1 @click="click">{{user.name}}</h1>
+        <Overlay :closeExtraElement="closeRegistryForm"/>
+        <h1>{{user.name}}</h1>
         <p>{{msg}}</p>
         <SkillRegistryForm />
     </div>
@@ -9,7 +9,7 @@
 
 <script>
 
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import SkillRegistryForm from '../../components/SkillRegister/SkillRegistryForm';
 import Overlay from '../../components/UI/Overlay';
 
@@ -28,8 +28,10 @@ export default {
         this.$store.dispatch('getUserProfile');
     },
     methods:{
-        click(){
-            console.log('triggered');
+        ...mapMutations(['closeRegistryForm']),
+        closeRegistryForm(){
+            //this.$store.commit('closeRegistryForm');
+            console.log('hello');
         }
     },
     computed:{
