@@ -1,13 +1,13 @@
 <template>
     <div class="registry-form__page bg-light">
-        <h2>{{pageData[0]}}</h2>
+        <h2>{{pageData.index}}</h2>
         <div
-            v-for="(item,index) in pageData[1]"
-            :key="index"
+            v-for="(item,y) in pageData.item"
+            :key="y"
             class="custom-span"
             >
-            {{ item }}
-            <select name="hello">
+            {{ y }}
+            <select v-model.number="skills[index][y]">
                 <option value="0">None</option>
                 <option value="1">Basic</option>
                 <option value="2">Intermediate</option>
@@ -32,42 +32,14 @@ export default {
     },
     data () {
         return{
-            delay: 1
+
         }
     },
     components:{
 
     },
     methods:{
-        beforeEnter(el) {
-            el.style.opacity = 0
-            el.style.top = '50%'
-            //el.classList.remove('fadeIn');
-            //el.classList.add('fadeOutUp');
-        },
-        enter(el, done) {
-            setTimeout(() => {
-                // el.classList.remove('fadeOutUp');
-                // el.classList.add('fadeInUp');
-                TweenLite.to(el, 0.5, {
-                    opacity: 1,
-                    top: 0,
-                    onComplete: done
-                })
-            }, this.delay * 150)
-            this.delay ++;
-        },
-        afterEnter(el) {
-        },
-        beforeLeave() {
-        },
-        leave(el, done) {
 
-        done()
-        },
-        afterLeave(el) {
-
-        },
     }
 }
 </script>
@@ -119,6 +91,9 @@ export default {
             opacity: 0;
             visibility: hidden;
         }
+        90% {
+            opacity: 0.4;
+        }
 
         100% {
             transform: translateX(0);
@@ -133,6 +108,9 @@ export default {
             opacity: 1;
             visibility: visible;
         }
+        90% {
+            opacity: 0.4;
+        }
 
         100% {
             transform: translateX(-100%);
@@ -140,8 +118,5 @@ export default {
             visibility: hidden;
         }
     }
-
-
-
 </style>
 

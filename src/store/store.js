@@ -4,10 +4,10 @@ import * as firebase from 'firebase';
 import router from '../router/index';
 
 //Modules
-// import userModule from './modules/user/index';
-// import usersModule from './modules/users/index';
 import matrix from './modules/matrix/matrix';
 import ui from './modules/ui/ui';
+import registryForm from './modules/registryForm/registryForm';
+
 
 Vue.use(Vuex);
 
@@ -173,12 +173,12 @@ export const store = new Vuex.Store({
     getProfile: state => {
       return state.currentUser;
     },
-
   },
 
   modules: {
     //user,
     //users,
+    registryForm,
     matrix,
     ui
   }
