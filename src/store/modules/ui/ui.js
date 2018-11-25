@@ -2,7 +2,7 @@ export default {
 
   state: {
     modalIsVisible: false,
-    overlayIsVisible: true,
+    overlayIsVisible: false,
     devsForModal: null,
     skillToLookFor: null
   },

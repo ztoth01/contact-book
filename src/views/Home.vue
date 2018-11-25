@@ -4,7 +4,7 @@
         <h1 class="test">Welcome to Skills Matrix</h1>
         <p>Skills Matrix is a social network for digital team members to share their technical skills matrix so that we can support and encourage learning, development and professional advancement as an organisation.</p>
     </div>
-    <div class="container">
+    <!-- <div class="container">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
             <hr>
             <button class="btn btn-primary" @click=" toShow = !toShow">Show Alert</button>
@@ -22,7 +22,7 @@
             </transition>
             <button class="btn btn-primary" @click=" differentClass = !differentClass">Chaneg Class</button>
         </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

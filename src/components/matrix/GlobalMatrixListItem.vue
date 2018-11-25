@@ -90,20 +90,20 @@ export default {
         },
         afterLeave(el) {
 
-        },
-        devs(keySkill){
-            return this.contacts.filter((elem) => {
-                if (elem['skillsMatrix'] !== 0) {
-                    for (let key in elem['skillsMatrix']) {
-                        if (elem['skillsMatrix'].hasOwnProperty(key)) {
-                            if (elem['skillsMatrix'][key][keySkill] !== undefined && elem['skillsMatrix'][key][keySkill].level > 0) {
-                                return elem;
-                            }
-                        }
-                    }
-                }
-            }).length;
         }
+        // devs(keySkill){
+        //     return this.contacts.filter((elem) => {
+        //         if (elem['skillsMatrix'] !== 0) {
+        //             for (let key in elem['skillsMatrix']) {
+        //                 if (elem['skillsMatrix'].hasOwnProperty(key)) {
+        //                     if (elem['skillsMatrix'][key][keySkill] !== undefined && elem['skillsMatrix'][key][keySkill].level > 0) {
+        //                         return elem;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }).length;
+        // }
     },
     computed:{
     ...mapGetters({

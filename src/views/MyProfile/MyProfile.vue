@@ -2,8 +2,8 @@
     <div>
         <Overlay :closeExtraElement="closeRegistryForm"/>
         <h1>{{loggedInUser.name}}</h1>
-        <SkillRegistryForm v-if="loggedInUser.skillsMatrix !== 0 && skillsData !== null" :skillsData="skillsData" />
-        <SkillRegistryForm v-else-if="skillsData !== null"  :skillsData="skillsData" />
+        <!-- <SkillRegistryForm v-if="loggedInUser.skillsMatrix !== 0 && isLoaded" :skillsData="skillsData" /> -->
+        <SkillRegistryForm v-if="isLoaded" :skillsData="skillsData" />
     </div>
 </template>
 
@@ -18,7 +18,8 @@ export default {
 
     data(){
         return{
-            skillsData: null
+            skillsData: null,
+            isLoaded: false
         }
     },
     components:{
@@ -27,12 +28,6 @@ export default {
     },
     created() {
         this.$store.dispatch('getUserProfile');
-        console.log(this.loggedInUser.skillsMatrix, 'ppp');
-        if(this.loggedInUser.skillsMatrix === 0 ){
-            this.getSkills();
-        }else if(this.loggedInUser.skillsMatrix !== 0){
-            this.skillsData = this.loggedInUser.skillsMatrix
-        }
     },
     methods:{
         ...mapMutations(['closeRegistryForm']),
@@ -42,6 +37,7 @@ export default {
         getSkills(){
             firebase.database().ref("skillsMatrix/").on('value', (data) => {
                 this.skillsData = data.val();
+                this.isLoaded = true;
                 //this.skills = Object.keys(data.val()).map(e => [].concat(e,[Object.keys(data.val()[e])]));
             })
         }
@@ -50,6 +46,18 @@ export default {
     ...mapGetters({
             loggedInUser: 'getProfile'
         })
+    },
+    watch:{
+        loggedInUser(){
+            if(this.loggedInUser.skillsMatrix !== undefined ){
+                if(this.loggedInUser.skillsMatrix === 0){
+                    this.getSkills();
+                }else if(this.loggedInUser.skillsMatrix !== 0){
+                    this.skillsData = this.loggedInUser.skillsMatrix;
+                    this.isLoaded = true;
+                }
+            }
+        }
     }
 }
 </script>

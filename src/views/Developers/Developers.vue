@@ -3,7 +3,7 @@
         <Overlay/>
         <Modal />
         <Sidebar/>
-        <Main v-if="matrixData" :matrixData="matrixData" />
+        <Main :matrixData="matrixData"/>
     </div>
 </template>
 
@@ -24,7 +24,7 @@ export default {
         Overlay
     },
     created(){
-        //this.$store.dispatch('getGlobaMatrixDbFromFirebase');
+        this.$store.dispatch('getGlobaMatrixDbFromFirebase');
     },
     computed:{
         ...mapGetters({

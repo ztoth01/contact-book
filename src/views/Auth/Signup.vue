@@ -51,7 +51,7 @@
           <p v-if="!$v.confirmPassword.sameAs">Please doesn't match</p>
           <p v-if="!$v.confirmPassword.required">Required.</p>
         </div>
-        <div class="hobbies">
+        <!-- <div class="hobbies">
           <h3>Add some Hobbies</h3>
           <button @click="onAddHobby" type="button">Add Hobby</button>
           <div class="hobby-list">
@@ -67,7 +67,7 @@
               <button @click="onDeleteHobby(hobbyInput.id)" type="button">X</button>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="input">
           <img v-if="imageUrl !== ''" :src="imageUrl" title="profile image"/>
           <button @click.prevent="uploadImage" class="btn btn-info">Upload Profile Image</button>
@@ -90,9 +90,10 @@
         email: '',
         password: '',
         confirmPassword: '',
-        hobbyInputs: [],
+        //hobbyInputs: [],
         profilePicture: null,
-        imageUrl:''
+        imageUrl:'',
+        skillsMatrix:0
       }
     },
     validations: {
@@ -148,8 +149,9 @@
           email: this.email,
           password: this.password,
           confirmPassword: this.confirmPassword,
-          hobbies: this.hobbyInputs.map(hobby => hobby.value),
-          profilePicture: this.profilePicture
+          //hobbies: this.hobbyInputs.map(hobby => hobby.value),
+          profilePicture: this.profilePicture,
+          skillsMatrix:0
         }
         this.$store.dispatch('singUp', formData);
       }

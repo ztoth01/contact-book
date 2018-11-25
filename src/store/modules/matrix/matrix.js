@@ -27,7 +27,7 @@ export default {
                 if (elem['skillsMatrix'] !== 0) {
                   for (let key in elem['skillsMatrix']) {
                     if (elem['skillsMatrix'].hasOwnProperty(key)) {
-                      if (elem['skillsMatrix'][key][i] !== undefined && elem['skillsMatrix'][key][i].level > 0) {
+                      if (elem['skillsMatrix'][key][i] !== undefined && elem['skillsMatrix'][key][i] > 0) {
                         index++;
                         devs['dev' + index] = elem.id;
                       }
