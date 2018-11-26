@@ -1,28 +1,16 @@
 export default {
 
   state: {
-
+    registryFormIsVisible: false,
   },
 
   mutations: {
-    // openModal(state) {
-    //   state.modalIsVisible = true;
-    // },
-    // closeModal(state) {
-    //   state.modalIsVisible = false;
-    // },
-    // openOverlay(state) {
-    //   state.overlayIsVisible = true;
-    // },
-    // closeOverlay(state) {
-    //   state.overlayIsVisible = false;
-    // },
-    // setDevsForModal(state, payload) {
-    //   state.devsForModal = payload;
-    // },
-    // setSkillToLookFor(state, payload) {
-    //   state.skillToLookFor = payload;
-    // }
+    openRegistryForm(state) {
+      state.registryFormIsVisible = true;
+    },
+    closeRegistryForm(state) {
+      state.registryFormIsVisible = false;
+    },
   },
 
   actions: {
@@ -30,14 +18,8 @@ export default {
   },
 
   getters: {
-    // getModalState: state => {
-    //   return state.modalIsVisible;
-    // },
-    // getOverlayState: state => {
-    //   return state.overlayIsVisible;
-    // },
-    // getDevsForModal: state => {
-    //   return state.devsForModal;
-    // },
+    getRegistryFormState: state => {
+      return state.registryFormIsVisible;
+    }
   }
 }

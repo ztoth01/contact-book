@@ -4,7 +4,8 @@ export default {
     modalIsVisible: false,
     overlayIsVisible: false,
     devsForModal: null,
-    skillToLookFor: null
+    skillToLookFor: null,
+    messageCompIsVisible: false
   },
 
   mutations: {
@@ -25,6 +26,12 @@ export default {
     },
     setSkillToLookFor(state, payload) {
       state.skillToLookFor = payload;
+    },
+    openMessageComp(state) {
+      state.messageCompIsVisible = true;
+      setTimeout(() => {
+        state.messageCompIsVisible = false;
+      }, 3000)
     }
   },
 
@@ -41,6 +48,9 @@ export default {
     },
     getDevsForModal: state => {
       return state.devsForModal;
+    },
+    getMessageCompState: state => {
+      return state.messageCompIsVisible;
     },
   }
 }

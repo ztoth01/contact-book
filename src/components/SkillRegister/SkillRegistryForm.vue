@@ -60,8 +60,8 @@ export default {
     },
     props:{
         skillsData:{
-            // type: Object,
-            // required: true
+            type: Object,
+            required: true
         }
     },
     data () {
@@ -71,7 +71,7 @@ export default {
         }
     },
     methods:{
-        ...mapMutations(['setCurrentUser']),
+        ...mapMutations(['setCurrentUser','closeRegistryForm','openMessageComp']),
         nextPage(){
             this.currentIndex++;
         },
@@ -79,12 +79,22 @@ export default {
             this.currentIndex--;
         },
         save(){
-            //Save method comes here
             let currentUser = {...this.currentUser};
-                currentUser.skillsMatrix = this.skillsData
-            console.log(currentUser);
+                currentUser.skillsMatrix = this.skillsData;
             this.$store.commit('setCurrentUser',currentUser);
-            firebase.database().ref('/contacts').child(this.currentUser.id).update({ skillsMatrix: this.skillsData })
+            firebase.database()
+                .ref('/contacts')
+                .child(this.currentUser.id)
+                .update({ skillsMatrix: this.skillsData }, (error) => {
+                    this.$store.commit('closeRegistryForm');
+                    this.$store.commit('closeOverlay');
+                    this.$store.commit('openMessageComp');
+                    if (error) {
+                        console.log('The write failed...');
+                    } else {
+                        console.log('Data saved successfully!');
+                    }
+                });
         },
         getSkills(){
             firebase.database().ref("skillsMatrix/").on('value', (data) => {
@@ -93,12 +103,10 @@ export default {
             })
         }
     },
-    // created(){
-    //     this.getSkills();
-    // },
     computed:{
         ...mapGetters({
-            currentUser: 'getProfile'
+            currentUser: 'getProfile',
+            messageC:'messageCompIsVisible'
         }),
     }
 }
