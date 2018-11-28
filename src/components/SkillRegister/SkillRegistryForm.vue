@@ -1,50 +1,58 @@
 <template>
-    <div class="registry-form mx-auto bg-light">
+    <transition
+        enter-active-class="animated pulse"
+        leave-active-class="animated bounceOutRight"
+        >
         <div
-            v-for="(item, index, i) in skillsData"
-            :key="index"
-            :class="i === currentIndex ? ' is--visible' : ' is--hidden'"
-            class="registry-form__page bg-light">
-            <div class="registry-form__page bg-light">
-                <h2>{{index}}</h2>
-                <div
-                    v-for="(z,subSkill) in item"
-                    :key="subSkill"
-                    class="custom-span"
-                    >
-                    {{ subSkill }}
-                    <select v-model.number="skillsData[index][subSkill]">
-                        <option value="0">None</option>
-                        <option value="1">Basic</option>
-                        <option value="2">Intermediate</option>
-                        <option value="3">Expert</option>
-                    </select>
+            class="registry-form mx-auto bg-light mx-auto"
+            v-if="isVisible"
+            >
+            <div
+                v-for="(item, index, i) in skillsData"
+                :key="index"
+                :class="i === currentIndex ? ' is--visible' : ' is--hidden'"
+                class="registry-form__page bg-light">
+                <div class="registry-form__page bg-light">
+                    <h2>{{index}}</h2>
+                    <div
+                        v-for="(z,subSkill) in item"
+                        :key="subSkill"
+                        class="custom-span"
+                        >
+                        {{ subSkill }}
+                        <select v-model.number="skillsData[index][subSkill]">
+                            <option value="0">None</option>
+                            <option value="1">Basic</option>
+                            <option value="2">Intermediate</option>
+                            <option value="3">Expert</option>
+                        </select>
+                    </div>
                 </div>
             </div>
+            <button
+                type="button"
+                class="btn
+                btn-primary"
+                @click="previousPage"
+                :disabled="currentIndex === 0">
+                Back
+            </button>
+            <button
+                type="button"
+                class="btn btn-primary"
+                @click="nextPage"
+                v-if="currentIndex !== Object.keys(skillsData).length - 1">
+                Next
+            </button>
+            <button
+                v-if="currentIndex === Object.keys(skillsData).length - 1"
+                type="button"
+                @click="save"
+                class="btn btn-primary">
+                Save
+            </button>
         </div>
-        <button
-            type="button"
-            class="btn
-            btn-primary"
-            @click="previousPage"
-            :disabled="currentIndex === 0">
-            Back
-        </button>
-        <button
-            type="button"
-            class="btn btn-primary"
-            @click="nextPage"
-            v-if="currentIndex !== Object.keys(skillsData).length - 1">
-            Next
-        </button>
-        <button
-            v-if="currentIndex === Object.keys(skillsData).length - 1"
-            type="button"
-            @click="save"
-            class="btn btn-primary">
-            Save
-        </button>
-    </div>
+    </transition>
 </template>
 
 <script>
@@ -62,6 +70,10 @@ export default {
         skillsData:{
             type: Object,
             required: true
+        },
+        isVisible:{
+            type: Boolean,
+            required: true
         }
     },
     data () {
@@ -71,7 +83,7 @@ export default {
         }
     },
     methods:{
-        ...mapMutations(['setCurrentUser','closeRegistryForm','openMessageComp']),
+        ...mapMutations(['setCurrentUser','closeRegistryForm','openMessageComp','setMessageContent']),
         nextPage(){
             this.currentIndex++;
         },
@@ -88,12 +100,12 @@ export default {
                 .update({ skillsMatrix: this.skillsData }, (error) => {
                     this.$store.commit('closeRegistryForm');
                     this.$store.commit('closeOverlay');
-                    this.$store.commit('openMessageComp');
                     if (error) {
-                        console.log('The write failed...');
+                        this.$store.commit('setMessageContent',{text: 'There was an error', className: 'alert-danger'});
                     } else {
-                        console.log('Data saved successfully!');
+                        this.$store.commit('setMessageContent',{text: 'Data saved successfully!', className: 'alert-success'});
                     }
+                    this.$store.commit('openMessageComp');
                 });
         },
         getSkills(){
@@ -105,13 +117,11 @@ export default {
     },
     computed:{
         ...mapGetters({
-            currentUser: 'getProfile',
-            messageC:'messageCompIsVisible'
+            currentUser: 'getProfile'
         }),
     }
 }
 </script>
-
 
 <style scoped lang="scss">
     .registry-form{
@@ -119,8 +129,11 @@ export default {
         z-index: 100;
         height: 400px;
         overflow: hidden;
-        position: relative;
         display: flex;
+        position: fixed;
+        left: 0;
+        right: 0;
+        margin: auto;
         justify-content: space-between;
 
         .btn{

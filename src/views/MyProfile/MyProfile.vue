@@ -1,22 +1,13 @@
 <template>
     <div v-if="isLoaded">
-
-        <div v-if="msgCompIsVisible" class="mx-auto col-10 col-md-4">
-            <div class="alert alert-dismissible alert-success">
-                <p class="text-center">Data saved successfully!</p>
-            </div>
-        </div>
-
+        <Message />
         <Overlay :closeExtraElement="closeRegistryForm"/>
         <h1>{{loggedInUser.name}}</h1>
-        <SkillRegistryForm v-if="registryFormIsVisible" :skillsData="skillsData" />
-
-
+        <SkillRegistryForm :isVisible="registryFormIsVisible"  :skillsData="skillsData" />
         <div v-if="noSkillsHasBeenAddedYet">
             <h5>It looks like you haven't added any sills yet?</h5>
             <button class="btn" @click="openRegistryForm">Add Skills now</button>
         </div>
-
         <div v-if="!noSkillsHasBeenAddedYet">
             <h5>Would like to update your Skills Matrix?</h5>
             <button class="btn" @click="openRegistryForm">Update my Skills Matrix</button>
@@ -29,6 +20,7 @@
 import { mapGetters, mapMutations } from 'vuex';
 import SkillRegistryForm from '../../components/SkillRegister/SkillRegistryForm';
 import Overlay from '../../components/UI/Overlay';
+import Message from '../../components/UI/Message'
 import * as firebase from 'firebase';
 
 export default {
@@ -42,7 +34,8 @@ export default {
     },
     components:{
         SkillRegistryForm,
-        Overlay
+        Overlay,
+        Message
     },
     created() {
         this.$store.dispatch('getUserProfile');

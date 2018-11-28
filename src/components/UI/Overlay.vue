@@ -1,9 +1,13 @@
 <template>
-    <transition>
+    <transition
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut"
+        >
         <div
             class="overlay"
             @click="clicked"
-            :class="[overlayIsVisible ? 'visible' : 'hidden']">
+            v-if="overlayIsVisible"
+            >
         </div>
     </transition>
 </template>
@@ -21,8 +25,9 @@ export default {
         ...mapMutations(['closeOverlay']),
         clicked(){
             this.$store.commit('closeOverlay');
-            //that is how you referenc the function to close different stuff
-            //this.$store.commit('closeModal');
+            // that is how you referenc the function to close different stuff
+            // this.$store.commit('closeModal');
+            // :class="overlayIsVisible ? 'fadeIn' : 'fadeOut'"
             if(this.closeExtraElement){
                 this.closeExtraElement();
             }
@@ -61,17 +66,7 @@ export default {
         position: fixed;
         left:0;
         top:0;
-        background-color: rgba(0,0,0,.5);
-        transition: all 0.5 ease-in;
-
-        &.visible{
-            opacity: 1;
-            visibility: visible;
-        }
-        &.hidden{
-            opacity: 0;
-            visibility: hidden;
-        }
+        background-color: rgba(0,0,0,.8);
     }
 </style>
 

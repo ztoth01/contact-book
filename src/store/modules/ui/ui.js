@@ -5,7 +5,11 @@ export default {
     overlayIsVisible: false,
     devsForModal: null,
     skillToLookFor: null,
-    messageCompIsVisible: false
+    messageCompIsVisible: false,
+    messageContent: {
+      text: '',
+      className: ''
+    }
   },
 
   mutations: {
@@ -31,7 +35,10 @@ export default {
       state.messageCompIsVisible = true;
       setTimeout(() => {
         state.messageCompIsVisible = false;
-      }, 3000)
+      }, 2000);
+    },
+    setMessageContent(state, payload) {
+      state.messageContent = { ...payload }
     }
   },
 
@@ -51,6 +58,9 @@ export default {
     },
     getMessageCompState: state => {
       return state.messageCompIsVisible;
+    },
+    getMessageCompContent: state => {
+      return state.messageContent;
     },
   }
 }
