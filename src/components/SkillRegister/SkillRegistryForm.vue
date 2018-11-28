@@ -98,6 +98,7 @@ export default {
                 .ref('/contacts')
                 .child(this.currentUser.id)
                 .update({ skillsMatrix: this.skillsData }, (error) => {
+                    this.currentIndex = 0;
                     this.$store.commit('closeRegistryForm');
                     this.$store.commit('closeOverlay');
                     if (error) {

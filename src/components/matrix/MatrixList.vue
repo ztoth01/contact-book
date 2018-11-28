@@ -1,9 +1,10 @@
 <template>
-
-    <DevMatrixListItem v-if="listData.level" :listData="listData"/>
-    <GlobalMatrixListItem v-else :listData="listData"/>
-
+    <div>
+        <GlobalMatrixListItem v-if="typeof Object.values(listData)[0] === 'object'" :listData="listData"/>
+        <DevMatrixListItem v-else :listData="listData"/>
+    </div>
 </template>
+
 
 <script>
 

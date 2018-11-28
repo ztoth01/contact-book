@@ -1,11 +1,8 @@
 <template>
     <div class="matrix mx-auto">
         <div class="matrix__column" v-for="(elem, index) in matrixData"  :key="index">
-
             <span  class="category__title btn btn-alert alert alert-info btn-lg">{{index}}</span>
-
             <MatrixList :listData="elem" />
-
         </div>
     </div>
 </template>
@@ -14,7 +11,7 @@
 
 import * as firebase from 'firebase';
 import { mapGetters } from 'vuex';
-import MatrixList from '../components/matrix/MatrixList'
+import MatrixList from './MatrixList'
 
 export default {
     name: 'Matrix',

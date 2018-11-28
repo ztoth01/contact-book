@@ -26,20 +26,9 @@ export default {
     name: 'RegisteryFormPage',
     props:{
         pageData:{
-            //type: string,
-            //required: true
+            type: Object,
+            required: true
         }
-    },
-    data () {
-        return{
-
-        }
-    },
-    components:{
-
-    },
-    methods:{
-
     }
 }
 </script>

@@ -11,6 +11,8 @@
         <div v-if="!noSkillsHasBeenAddedYet">
             <h5>Would like to update your Skills Matrix?</h5>
             <button class="btn" @click="openRegistryForm">Update my Skills Matrix</button>
+
+            <Matrix v-if="skillsData !== null" :matrixData="skillsData" />
         </div>
     </div>
 </template>
@@ -20,7 +22,8 @@
 import { mapGetters, mapMutations } from 'vuex';
 import SkillRegistryForm from '../../components/SkillRegister/SkillRegistryForm';
 import Overlay from '../../components/UI/Overlay';
-import Message from '../../components/UI/Message'
+import Message from '../../components/UI/Message';
+import Matrix from '../../components/matrix/Matrix';
 import * as firebase from 'firebase';
 
 export default {
@@ -35,7 +38,8 @@ export default {
     components:{
         SkillRegistryForm,
         Overlay,
-        Message
+        Message,
+        Matrix
     },
     created() {
         this.$store.dispatch('getUserProfile');

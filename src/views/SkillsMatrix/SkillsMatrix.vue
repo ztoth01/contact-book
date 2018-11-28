@@ -10,7 +10,7 @@
 <script>
 
 import { mapGetters, mapMutations } from 'vuex';
-import Matrix from '../../components/Matrix';
+import Matrix from '../../components/matrix/Matrix';
 import Overlay from '../../components/UI/Overlay';
 import Modal from '../../components/UI/Modal';
 import { TweenLite } from 'gsap';

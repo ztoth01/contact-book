@@ -12,7 +12,7 @@
         <span
             v-for="(item, i) in listData"
             :key="i"
-            @click="clicked(item || 0)"
+            @click="clicked(item, i || 0)"
 
             class="btn btn-alert alert alert-info btn-sm dev-name height"
             :class="[
@@ -26,13 +26,6 @@
             <p v-if="item.devs == 0" >No Developer has this skill</p>
             <p v-else-if="Object.keys(item).length > 1" >{{ Object.keys(item).length }} Developers have this skill</p>
             <p v-else>{{ Object.keys(item).length }} Developer has this skill</p>
-            <!-- <span v-if="item.devs"
-                :class="'category__' + item.level">
-                <ul v-for="(dev, i) in item.devs" :key="dev + i">
-                    <li>
-                    </li>
-                </ul>
-            </span> -->
         </span>
     </transition-group>
 </template>
@@ -55,9 +48,10 @@ export default {
     },
     methods:{
         ...mapMutations(['openOverlay','openModal','setSkillToLookFor']),
-        clicked(data){
+        clicked(data, skill){
+            console.log(skill);
             this.$store.commit('setDevsForModal', {...data});
-            //this.$store.commit('setSkillToLookFor', data);
+            this.$store.commit('setSkillToLookFor', skill);
             this.$store.commit('openModal');
             this.$store.commit('openOverlay');
         },

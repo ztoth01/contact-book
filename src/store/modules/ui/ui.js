@@ -56,6 +56,9 @@ export default {
     getDevsForModal: state => {
       return state.devsForModal;
     },
+    getSkillForModal: state => {
+      return state.skillToLookFor;
+    },
     getMessageCompState: state => {
       return state.messageCompIsVisible;
     },

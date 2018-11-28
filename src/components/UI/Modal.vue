@@ -5,23 +5,22 @@
         >
         <div
             v-if="modalIsVisible"
-            class="card text-white bg-secondary modal col-10 col-md-6"
+            class="card text-white bg-dark modal col-10 col-md-6"
             @click="clicked"
-
             >
-            <div class="card-header">Header</div>
+            <div class="card-header"><h5>List of developers have skill in {{skill}}</h5></div>
             <div class="card-body">
                 <ul class="list-group">
                     <li
                         @click="clicked"
                         v-for="(dev, index) in devsForModal" :key="dev.id"
-                        :class="{'bg-light': index % 2 === 0 }"
+                        :class="index % 2 === 0 ? 'bg-light': 'll'"
                         class="list-group-item d-flex justify-content-between align-items-center">
                         <router-link :to="'/dev-profile/' + dev.id" class="nav-link" activeClass="active">
                             <span class="avatar">
                                 <img  :src="dev.profileImage" :alt="dev.name">
                             </span>
-                            {{dev.name}}
+                            <p class="text-left ml-4 text-muted"><strong>{{dev.name}}</strong> has a skill level of <strong> {{skillLevel(dev)}}</strong> in <strong>{{skill}}</strong></p>
                         </router-link>
                     </li>
                 </ul>
@@ -39,7 +38,8 @@ export default {
         ...mapGetters({
             modalIsVisible: 'getModalState',
             contacts: 'getContacts',
-            devs: 'getDevsForModal'
+            devs: 'getDevsForModal',
+            skill: 'getSkillForModal'
         }),
         devsForModal(){
             if(this.devs !== null){
@@ -57,6 +57,18 @@ export default {
             this.$store.commit('closeOverlay');
             this.$store.commit('closeModal');
         },
+        skillLevel(dev){
+            for(let key in dev.skillsMatrix){
+                const level = dev.skillsMatrix[key][this.skill];
+                if(level === 1){
+                    return 'Basic';
+                }else if(level === 2){
+                    return 'Intermediate';
+                }else{
+                    return 'Expert';
+                }
+            }
+        }
     },
 
 }
@@ -84,6 +96,10 @@ export default {
             width: 100%;
             height: auto;
             display: block;
+        }
+
+        .ll{
+            background-color: rgba(255, 255, 255, 0.075);
         }
     }
 </style>
